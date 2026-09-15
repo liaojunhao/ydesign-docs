@@ -1,0 +1,7 @@
+{
+  "title": "在线编辑器",
+  "description": "可视化编辑模板",
+  "icon": "PenTool",
+  "root": true,
+  "pages": ["index", "canvas", "templates"]
+}

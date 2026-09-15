@@ -1,0 +1,7 @@
+{
+  "title": "Editor",
+  "description": "Design templates visually",
+  "icon": "PenTool",
+  "root": true,
+  "pages": ["index", "canvas", "templates"]
+}

@@ -1,0 +1,22 @@
+---
+title: 变量
+description: 渲染模板时传入数据
+---
+
+变量是模板会读取的字段。在渲染请求里带上它们：
+
+```bash
+curl -X POST https://api.example.com/v1/render \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "templateId": "share-poster",
+    "format": "png",
+    "variables": {
+      "title": "夏季大促",
+      "cover": "https://cdn.example.com/hero.jpg"
+    }
+  }'
+```
+
+返回一般是图片 URL（也可以是二进制，看接口定义）。这一页只在图片 API 里；从这里切到编辑器会打开编辑器首页。

@@ -1,0 +1,18 @@
+---
+title: API Playground
+description: Try a live HTTP request from the docs
+---
+
+OpenAPI playground is an interactive panel generated from an OpenAPI spec. It shows parameters, request body, example code, and a **Send** button that actually calls the API.
+
+This demo uses [JSONPlaceholder](https://jsonplaceholder.typicode.com/) because it allows browser CORS. The site is statically exported, so there is no `/api/proxy` — the playground talks to the public server directly.
+
+<Callout title="Try it">
+  Open **Get a post**, keep `id` as `1`, then click Send. You should see JSON for the first post.
+</Callout>
+
+<Cards>
+  <Card title="Get a post" href="/en/docs/api/posts/get-post" />
+  <Card title="List posts" href="/en/docs/api/posts/list-posts" />
+  <Card title="Create a post" href="/en/docs/api/posts/create-post" />
+</Cards>

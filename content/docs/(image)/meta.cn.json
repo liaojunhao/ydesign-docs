@@ -1,0 +1,17 @@
+{
+  "title": "图片 API",
+  "description": "模板出图",
+  "icon": "Image",
+  "root": true,
+  "pages": [
+    "---指南---",
+    "index",
+    "templates",
+    "variables",
+    "---接口---",
+    "api",
+    "---示例---",
+    "live-codeblock",
+    "test"
+  ]
+}

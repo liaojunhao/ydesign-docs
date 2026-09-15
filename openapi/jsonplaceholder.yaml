@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: JSONPlaceholder
+  version: 1.0.0
+  description: |
+    Public demo API used by this site's OpenAPI playground.
+    Send a request in the docs to hit the live server — it allows browser CORS,
+    so it works with static GitHub Pages (no proxy required).
+servers:
+  - url: https://jsonplaceholder.typicode.com
+    description: JSONPlaceholder
+tags:
+  - name: posts
+    description: Blog posts
+paths:
+  /posts:
+    get:
+      operationId: list-posts
+      tags: [posts]
+      summary: List posts
+      description: Return all posts, optionally filtered by author.
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          description: Only return posts by this user.
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: A list of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      operationId: create-post
+      tags: [posts]
+      summary: Create a post
+      description: JSONPlaceholder fakes the create — it echoes your body with a new `id`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPost'
+            example:
+              title: Hello Fumadocs
+              body: Sent from the OpenAPI playground
+              userId: 1
+      responses:
+        '201':
+          description: Created (fake)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /posts/{id}:
+    get:
+      operationId: get-post
+      tags: [posts]
+      summary: Get a post
+      description: Fetch one post. Try `id` = `1`, then click Send.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Post id
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: A single post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '404':
+          description: Post not found
+components:
+  schemas:
+    NewPost:
+      type: object
+      required: [title, body, userId]
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        userId:
+          type: integer
+    Post:
+      allOf:
+        - $ref: '#/components/schemas/NewPost'
+        - type: object
+          required: [id]
+          properties:
+            id:
+              type: integer

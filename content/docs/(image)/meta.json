@@ -1,0 +1,17 @@
+{
+  "title": "Image API",
+  "description": "Templates to images",
+  "icon": "Image",
+  "root": true,
+  "pages": [
+    "---Guides---",
+    "index",
+    "templates",
+    "variables",
+    "---API---",
+    "api",
+    "---Examples---",
+    "live-codeblock",
+    "test"
+  ]
+}

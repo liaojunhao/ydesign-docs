@@ -1,0 +1,54 @@
+---
+title: Live Codeblock
+description: 类似 Docusaurus live-codeblock 的可编辑 React 预览
+---
+
+Fumadocs **没有** Docusaurus 那种 `jsx live` 代码围栏，但可以用 MDX 组件做到同样的事：改代码，预览立刻更新。
+
+## 交互预览
+
+下面的代码可以直接改。`Button` 和 `useState` 已经注入到运行时作用域里。
+
+<LiveCodeBlock example="counter" />
+
+## 怎么写
+
+在文档里插入 `LiveCodeBlock`：
+
+```mdx
+<LiveCodeBlock example="counter" />
+```
+
+或把 JSX 字符串传给 `code`：
+
+```mdx
+<LiveCodeBlock code="<Button>Hello Fumadocs</Button>" />
+```
+
+静态 JSX 预览：
+
+<LiveCodeBlock example="hello" />
+
+和对 Docusaurus 的对应关系：
+
+| Docusaurus | Fumadocs |
+| --- | --- |
+| `jsx live` 代码围栏 | `<LiveCodeBlock />` |
+| 代码写在 Markdown 里 | `example` 或 `code` 属性 |
+| 预览随编辑更新 | 同样 |
+
+如果代码里调用了 `render()`，组件会自动按 Docusaurus 的 `noInline` 模式执行：
+
+<LiveCodeBlock example="render" />
+
+## 注入自己的组件
+
+默认作用域里有 `Button` 和 `useState`。要加别的组件，传 `scope`：
+
+```mdx
+import { Alert } from '@/components/alert';
+
+<LiveCodeBlock code="<Alert>Hello</Alert>" scope={{ Alert }} />
+```
+
+组件定义在 `src/components/live-codeblock.tsx`，并已注册到 `src/components/mdx.tsx`，所以文档里不用再 import `LiveCodeBlock`。

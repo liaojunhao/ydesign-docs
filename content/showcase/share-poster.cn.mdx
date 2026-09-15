@@ -1,0 +1,21 @@
+---
+title: 分享海报
+description: 一次设计，按用户、活动和语言填变量，批量生成社交分享图。
+preview: share
+product: image
+order: 1
+---
+
+用 HTML 或 React JSX 写一张 1200×630（或自定义尺寸）的模板，把标题、封面、用户名做成变量。用户点「分享」时调用图片 API 即可出图。
+
+常见流程：
+
+1. 海报版式只设计一次。
+2. 渲染时传入 `{ title, cover, user }`。
+3. 把 PNG/JPEG 地址写进分享卡片。
+
+<Cards>
+  <Card title="编写模板" href="/cn/docs/templates" />
+  <Card title="绑定变量" href="/cn/docs/variables" />
+  <Card title="调用 API" href="/cn/docs/api" />
+</Cards>

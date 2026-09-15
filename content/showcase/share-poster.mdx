@@ -1,0 +1,21 @@
+---
+title: Share posters
+description: Generate WeChat, Twitter, and in-app share cards from one template.
+preview: share
+product: image
+order: 1
+---
+
+Write a 1200×630 (or custom) template in HTML or React JSX. Bind the title, cover image, and user name as variables, then call the Image API whenever someone hits Share.
+
+Typical flow:
+
+1. Design the poster once as a template.
+2. Pass `{ title, cover, user }` at render time.
+3. Cache the PNG/JPEG URL on the share payload.
+
+<Cards>
+  <Card title="Write a template" href="/en/docs/templates" />
+  <Card title="Bind variables" href="/en/docs/variables" />
+  <Card title="Call the API" href="/en/docs/api" />
+</Cards>

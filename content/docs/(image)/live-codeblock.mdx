@@ -1,0 +1,54 @@
+---
+title: Live Codeblock
+description: Editable React preview, similar to Docusaurus live-codeblock
+---
+
+Fumadocs does **not** ship Docusaurus-style `jsx live` fences. Use an MDX component instead: edit the code and the preview updates immediately.
+
+## Interactive preview
+
+You can edit the snippet below. `Button` and `useState` are already in scope.
+
+<LiveCodeBlock example="counter" />
+
+## How to write it
+
+Insert `LiveCodeBlock` in a document:
+
+```mdx
+<LiveCodeBlock example="counter" />
+```
+
+Or pass a JSX string:
+
+```mdx
+<LiveCodeBlock code="<Button>Hello Fumadocs</Button>" />
+```
+
+Static JSX:
+
+<LiveCodeBlock example="hello" />
+
+Compared with Docusaurus:
+
+| Docusaurus | Fumadocs |
+| --- | --- |
+| `jsx live` fence | `<LiveCodeBlock />` |
+| Code in Markdown | `example` or `code` |
+| Preview updates as you type | Same |
+
+If the snippet calls `render()`, it runs in Docusaurus `noInline` mode:
+
+<LiveCodeBlock example="render" />
+
+## Inject your own components
+
+The default scope includes `Button` and `useState`. Pass extras through `scope`:
+
+```mdx
+import { Alert } from '@/components/alert';
+
+<LiveCodeBlock code="<Alert>Hello</Alert>" scope={{ Alert }} />
+```
+
+The component lives in `src/components/live-codeblock.tsx` and is registered in `src/components/mdx.tsx`, so documents do not need to import `LiveCodeBlock`.

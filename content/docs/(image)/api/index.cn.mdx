@@ -1,0 +1,18 @@
+---
+title: API Playground
+description: 在文档里直接发一次真实 HTTP 请求
+---
+
+OpenAPI playground 是根据 OpenAPI 文档生成的交互面板：参数、请求体、示例代码，以及真正发请求的 **Send** 按钮。
+
+这个案例用的是 [JSONPlaceholder](https://jsonplaceholder.typicode.com/)。它允许浏览器跨域，所以静态导出的 GitHub Pages 也能用——站点没有 `/api/proxy`，playground 会直接请求这个公开接口。
+
+<Callout title="先试这个">
+  打开 **Get a post**，把 `id` 留成 `1`，点 Send。你会看到第一篇文章的 JSON。
+</Callout>
+
+<Cards>
+  <Card title="Get a post" href="/cn/docs/api/posts/get-post" />
+  <Card title="List posts" href="/cn/docs/api/posts/list-posts" />
+  <Card title="Create a post" href="/cn/docs/api/posts/create-post" />
+</Cards>

@@ -1,0 +1,22 @@
+---
+title: Variables
+description: Pass data when you render a template
+---
+
+Variables are the fields your template reads. Send them in the render request:
+
+```bash
+curl -X POST https://api.example.com/v1/render \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "templateId": "share-poster",
+    "format": "png",
+    "variables": {
+      "title": "Summer sale",
+      "cover": "https://cdn.example.com/hero.jpg"
+    }
+  }'
+```
+
+The response is an image URL (or binary, depending on the endpoint). This page only exists on Image API — switching to Editor from here opens the Editor home.
