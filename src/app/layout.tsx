@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import './global.css';
+import { localeRedirectScript } from '@/lib/locale-redirect-script';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -8,6 +9,9 @@ const inter = Inter({
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: localeRedirectScript }} />
+      </head>
       <body className="flex min-h-screen flex-col">{children}</body>
     </html>
   );
