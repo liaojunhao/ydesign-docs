@@ -26,7 +26,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: touch out/.nojekyll
+      - run: touch out/.nojekyll && echo ydesign.dev > out/CNAME
       - uses: actions/upload-pages-artifact@v4
         with:
           path: out
