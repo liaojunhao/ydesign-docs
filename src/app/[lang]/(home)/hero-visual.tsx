@@ -141,7 +141,7 @@ function EditorFrame({
   onTitleChange: (value: string) => void;
 }) {
   return (
-    <div className="flex min-h-56 flex-1 @min-[36rem]:min-h-64">
+    <div className="flex min-h-64 flex-1 lg:min-h-80">
       <div className="flex w-12 shrink-0 flex-col items-center gap-2 border-r border-black/5 bg-white py-3">
         <RailButton>
           <Plus className="size-4" />

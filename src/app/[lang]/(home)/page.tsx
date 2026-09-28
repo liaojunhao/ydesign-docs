@@ -10,13 +10,13 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
   return (
     <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-20">
-      <section className="grid items-center gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
-        <div>
-          <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm">
+      <section className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
+        <div className="flex flex-col">
+          <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">
             <PenTool className="size-3.5" />
             {copy.eyebrow}
           </p>
-          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-[2rem] sm:leading-[1.2]">
+          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-[2.5rem] sm:leading-[1.2]">
             {copy.titleLines[0]}
             <br />
             {copy.titleLines[1]}
@@ -24,7 +24,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           <p className="text-fd-muted-foreground mt-4 text-sm leading-relaxed sm:text-base">
             {copy.description}
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-auto lg:pt-8">
             <Link
               href={`/${lang}/docs`}
               className="bg-fd-primary text-fd-primary-foreground inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-medium hover:opacity-90"
