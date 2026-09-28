@@ -33,12 +33,13 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
   const [title, setTitle] = useState(hero.canvas.title);
 
   return (
-    <div className="relative sm:pb-8">
+    <div className="relative flex sm:pb-8">
       <div className="sm:w-[66%]">
         <EditorFrame hero={hero} title={title} onTitleChange={setTitle} />
       </div>
-      <div className="relative z-10 mt-4 sm:absolute sm:top-12 sm:right-0 sm:mt-0 sm:w-[46%]">
-        <div className="rounded-2xl bg-[#f5f0e8] p-3 shadow-[0_22px_50px_-24px_rgba(0,0,0,0.4)] ring-1 ring-black/5 sm:p-4">
+      <div className="relative sm:w-[46%]">
+        <div className="rounded-tr-2xl border-b border-l-0 border-black/5 bg-white py-4 ring-1 ring-black/10"></div>
+        <div className="h-full rounded-2xl rounded-tl-none rounded-tr-none rounded-bl-none bg-[#f5f0e8] p-3 shadow-[0_22px_50px_-24px_rgba(0,0,0,0.4)] ring-1 ring-black/5 sm:p-4">
           <PromoPoster hero={hero} title={title} />
         </div>
       </div>
@@ -56,7 +57,7 @@ function EditorFrame({
   onTitleChange: (value: string) => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10">
+    <div className="overflow-hidden rounded-2xl rounded-tr-none rounded-br-none bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10">
       <div className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2">
         <div className="hidden items-center gap-3 text-[11px] text-neutral-500 sm:flex">
           <span className="inline-flex items-center gap-1">
@@ -91,7 +92,7 @@ function EditorFrame({
             <LayoutTemplate className="size-4" />
           </RailButton>
         </div>
-        <div className="relative flex flex-1 items-center bg-[radial-gradient(circle,#d4d4d8_1px,transparent_1px)] [background-size:14px_14px] p-4 sm:pr-16">
+        <div className="relative flex flex-1 items-center bg-[radial-gradient(circle,#d4d4d8_1px,transparent_1px)] [background-size:14px_14px] p-4 sm:px-16">
           <PromoPoster
             className="w-[min(100%,17rem)] rounded-lg shadow-md ring-1 ring-black/5"
             hero={hero}
@@ -178,11 +179,11 @@ function EditableTitle({
   onTitleChange: (value: string) => void;
 }) {
   return (
-    <div className="relative mt-8 mb-1.5 grid w-max max-w-full">
-      <div className="absolute -top-7 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-md bg-white px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 shadow-sm ring-1 ring-black/10">
+    <div className="relative mt-[0.45em] mb-1.5 grid w-max max-w-full">
+      {/* <div className="absolute -top-7 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-md bg-white px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 shadow-sm ring-1 ring-black/10">
         <Move className="size-3" />
         {position}
-      </div>
+      </div> */}
       <span
         aria-hidden
         className={`invisible col-start-1 row-start-1 px-px whitespace-pre ${titleClass}`}
