@@ -33,32 +33,8 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
   const [title, setTitle] = useState(hero.canvas.title);
 
   return (
-    <div className="relative flex sm:pb-8">
-      <div className="sm:w-[66%]">
-        <EditorFrame hero={hero} title={title} onTitleChange={setTitle} />
-      </div>
-      <div className="relative sm:w-[46%]">
-        <div className="rounded-tr-2xl border-b border-l-0 border-black/5 bg-white py-4 ring-1 ring-black/10"></div>
-        <div className="h-full rounded-2xl rounded-tl-none rounded-tr-none rounded-bl-none bg-[#f5f0e8] p-3 shadow-[0_22px_50px_-24px_rgba(0,0,0,0.4)] ring-1 ring-black/5 sm:p-4">
-          <PromoPoster hero={hero} title={title} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function EditorFrame({
-  hero,
-  title,
-  onTitleChange,
-}: {
-  hero: HeroCopy;
-  title: string;
-  onTitleChange: (value: string) => void;
-}) {
-  return (
-    <div className="overflow-hidden rounded-2xl rounded-tr-none rounded-br-none bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10">
-      <div className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2">
+    <div className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10 sm:grid sm:grid-cols-[minmax(0,1.25fr)_minmax(15rem,0.75fr)] sm:grid-rows-[auto_1fr]">
+      <div className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2 sm:col-start-1 sm:row-start-1">
         <div className="hidden items-center gap-3 text-[11px] text-neutral-500 sm:flex">
           <span className="inline-flex items-center gap-1">
             <LayoutTemplate className="size-3.5" />
@@ -77,29 +53,51 @@ function EditorFrame({
           {hero.editor}
         </span>
       </div>
-      <div className="flex min-h-64 sm:min-h-72">
-        <div className="flex w-12 shrink-0 flex-col items-center gap-2 border-r border-black/5 bg-white py-3">
-          <RailButton>
-            <Plus className="size-4" />
-          </RailButton>
-          <RailButton active>
-            <Type className="size-4" />
-          </RailButton>
-          <RailButton>
-            <ImageIcon className="size-4" />
-          </RailButton>
-          <RailButton>
-            <LayoutTemplate className="size-4" />
-          </RailButton>
-        </div>
-        <div className="relative flex flex-1 items-center bg-[radial-gradient(circle,#d4d4d8_1px,transparent_1px)] [background-size:14px_14px] p-4 sm:px-16">
-          <PromoPoster
-            className="w-[min(100%,17rem)] rounded-lg shadow-md ring-1 ring-black/5"
-            hero={hero}
-            title={title}
-            onTitleChange={onTitleChange}
-          />
-        </div>
+      <div className="hidden items-center justify-end border-b border-l border-black/5 bg-white px-3 sm:col-start-2 sm:row-start-1 sm:flex">
+        <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-500">
+          Preview
+        </span>
+      </div>
+      <EditorFrame hero={hero} title={title} onTitleChange={setTitle} />
+      <div className="flex items-center justify-center bg-[#f5f0e8] p-4 sm:col-start-2 sm:row-start-2 sm:border-l sm:border-black/5">
+        <PromoPoster hero={hero} title={title} />
+      </div>
+    </div>
+  );
+}
+
+function EditorFrame({
+  hero,
+  title,
+  onTitleChange,
+}: {
+  hero: HeroCopy;
+  title: string;
+  onTitleChange: (value: string) => void;
+}) {
+  return (
+    <div className="flex min-h-64 sm:col-start-1 sm:row-start-2 sm:min-h-72">
+      <div className="flex w-12 shrink-0 flex-col items-center gap-2 border-r border-black/5 bg-white py-3">
+        <RailButton>
+          <Plus className="size-4" />
+        </RailButton>
+        <RailButton active>
+          <Type className="size-4" />
+        </RailButton>
+        <RailButton>
+          <ImageIcon className="size-4" />
+        </RailButton>
+        <RailButton>
+          <LayoutTemplate className="size-4" />
+        </RailButton>
+      </div>
+      <div className="relative flex flex-1 items-center bg-[radial-gradient(circle,#d4d4d8_1px,transparent_1px)] [background-size:14px_14px] p-4 sm:px-16">
+        <PromoPoster
+          className="w-[min(100%,17rem)] rounded-lg shadow-md ring-1 ring-black/5"
+          hero={hero}
+          title={title}
+          onTitleChange={onTitleChange}
+        />
       </div>
     </div>
   );
