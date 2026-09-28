@@ -9,7 +9,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const copy = lang === 'cn' ? homeCopy.cn : homeCopy.en;
 
   return (
-    <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-20">
+    <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-28">
       <section className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
         <div className="flex flex-col">
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">

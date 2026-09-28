@@ -100,7 +100,7 @@ function VariablePanel({
 }) {
   return (
     <section className="flex min-w-0 flex-col border-t border-black/5 bg-white @min-[36rem]:border-t-0 @min-[36rem]:border-l">
-      <div className="flex h-10 shrink-0 items-center border-b border-black/5 px-3">
+      <div className="flex h-10 shrink-0 items-center justify-end border-b border-black/5 px-3">
         <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-500">
           {hero.variables.panel}
         </span>
