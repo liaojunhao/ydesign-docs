@@ -9,9 +9,9 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const copy = lang === 'cn' ? homeCopy.cn : homeCopy.en;
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-12 sm:px-6 sm:py-20">
-      <section className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:gap-12">
-        <div className="max-w-xl">
+    <main className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col px-4 py-12 sm:px-6 sm:py-20">
+      <section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+        <div>
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm">
             <PenTool className="size-3.5" />
             {copy.eyebrow}

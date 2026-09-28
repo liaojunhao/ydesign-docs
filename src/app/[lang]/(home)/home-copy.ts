@@ -47,7 +47,7 @@ export const homeCopy = {
   },
   cn: {
     eyebrow: '面向开发者的可视化编辑器 + 图片生成 API',
-    titleLines: ['基于模板调整编辑', '自动批量出图'],
+    titleLines: ['基于模板调整数据结构', '自动批量出图'],
     description:
       '在编辑器里调整版式、文案和图层，保存为可复用模板。调用 API 传入不同数据，一次生成整批海报、封面和商品图。',
     primaryCta: '开始渲染',
