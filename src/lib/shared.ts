@@ -3,7 +3,7 @@ import { i18n } from './i18n';
 
 export const appName = {
   en: 'ydesign',
-  cn: '易图设计',
+  cn: 'ydesign',
 } as const;
 
 export function getAppName(locale: string) {

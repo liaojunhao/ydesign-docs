@@ -6,7 +6,12 @@ export function baseOptions(locale: string): BaseLayoutProps {
 
   return {
     nav: {
-      title: getAppName(locale),
+      title: (
+        <>
+          <img src="/favicon.svg" alt="" width={20} height={20} className="size-5" />
+          {getAppName(locale)}
+        </>
+      ),
       url: `/${locale}`,
     },
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
