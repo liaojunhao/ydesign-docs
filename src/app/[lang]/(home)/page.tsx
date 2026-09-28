@@ -24,7 +24,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           <p className="text-fd-muted-foreground mt-4 text-sm leading-relaxed sm:text-base">
             {copy.description}
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-auto lg:pt-8">
+          <div className="flex flex-wrap items-center gap-3 lg:pt-8">
             <Link
               href={`/${lang}/docs`}
               className="bg-fd-primary text-fd-primary-foreground inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-medium hover:opacity-90"
