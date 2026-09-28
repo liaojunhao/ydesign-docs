@@ -3,11 +3,12 @@ export const homeCopy = {
     eyebrow: 'Visual editor + image API',
     titleLines: ['Edit the template once', 'Batch-render with the API'],
     description:
-      'Adjust layout, copy, and layers in the editor, save a reusable template, then pass different data to the API and render posters, covers, and product images in one go.',
+      'Adjust the template, then pass different data to the API and batch-render posters and product images.',
     primaryCta: 'Start rendering',
     secondaryCta: 'View docs',
     hero: {
       editor: 'Editor',
+      preview: 'Preview',
       imageAlt: 'Rendered summer promo image',
       tools: {
         template: 'Template',
@@ -54,11 +55,12 @@ export const homeCopy = {
     eyebrow: '面向开发者的可视化编辑器 + 图片生成 API',
     titleLines: ['基于模板调整数据结构', '自动批量出图'],
     description:
-      '在编辑器里调整版式、文案和图层，保存为可复用模板。调用 API 传入不同数据，一次生成整批海报、封面和商品图。',
+      '在编辑器里调整版式和文案，保存为可复用模板。传入不同数据，一次生成整批海报和商品图。',
     primaryCta: '开始渲染',
     secondaryCta: '查看文档',
     hero: {
       editor: '编辑器',
+      preview: '预览',
       imageAlt: '夏季焕新商品促销图渲染结果',
       tools: {
         template: '模板',

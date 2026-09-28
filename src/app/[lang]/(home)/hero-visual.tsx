@@ -11,6 +11,7 @@ import {
 
 type HeroCopy = {
   editor: string;
+  preview: string;
   imageAlt: string;
   tools: {
     template: string;
@@ -72,7 +73,7 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
         <section className="flex min-w-0 flex-col border-t border-black/5 @min-[36rem]:border-t-0 @min-[36rem]:border-l">
           <div className="flex h-10 items-center justify-end border-b border-black/5 bg-white px-3">
             <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-500">
-              Preview
+              {hero.preview}
             </span>
           </div>
           <div className="flex flex-1 items-center justify-center bg-[#f5f0e8] p-4">

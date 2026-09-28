@@ -9,19 +9,19 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const copy = lang === 'cn' ? homeCopy.cn : homeCopy.en;
 
   return (
-    <main className="mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-4 py-12 sm:px-6 sm:py-20">
-      <section className="grid items-center gap-10 lg:grid-cols-[minmax(0,46rem)_minmax(0,1fr)] lg:gap-12">
+    <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-20">
+      <section className="grid items-center gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
         <div>
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm">
             <PenTool className="size-3.5" />
             {copy.eyebrow}
           </p>
-          <h1 className="mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.12]">
+          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-[2rem] sm:leading-[1.2]">
             {copy.titleLines[0]}
             <br />
             {copy.titleLines[1]}
           </h1>
-          <p className="text-fd-muted-foreground mt-5 text-base leading-relaxed sm:text-lg">
+          <p className="text-fd-muted-foreground mt-4 text-sm leading-relaxed sm:text-base">
             {copy.description}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
