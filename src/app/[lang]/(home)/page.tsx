@@ -40,7 +40,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
             </Link>
           </div>
         </div>
-        <HeroVisual hero={copy.hero} />
+        <HeroVisual key={lang} hero={copy.hero} />
       </section>
 
       {/* <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

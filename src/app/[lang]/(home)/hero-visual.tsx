@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useState, type ReactNode } from 'react';
 import {
   Image as ImageIcon,
   LayoutTemplate,
@@ -19,35 +21,42 @@ type HeroCopy = {
   canvas: {
     badge: string;
     title: string;
+    titleLabel: string;
     subtitle: string;
+    cta: string;
+    price: string;
+    original: string;
   };
 };
 
 export function HeroVisual({ hero }: { hero: HeroCopy }) {
+  const [title, setTitle] = useState(hero.canvas.title);
+
   return (
     <div className="relative sm:pb-8">
       <div className="sm:w-[66%]">
-        <EditorFrame hero={hero} />
+        <EditorFrame hero={hero} title={title} onTitleChange={setTitle} />
       </div>
-      <div className="relative z-10 mt-4 sm:absolute sm:top-12 sm:right-0 sm:mt-0 sm:w-[42%]">
-        <div className="flex items-center justify-center rounded-2xl bg-[#f5f0e8] p-3 shadow-[0_22px_50px_-24px_rgba(0,0,0,0.4)] ring-1 ring-black/5 sm:p-4">
-          <img
-            alt={hero.imageAlt}
-            className="aspect-5/3 w-full rounded-2xl object-cover shadow-xl"
-            src="/images/hero_product_image.jpg"
-          />
+      <div className="relative z-10 mt-4 sm:absolute sm:top-12 sm:right-0 sm:mt-0 sm:w-[46%]">
+        <div className="rounded-2xl bg-[#f5f0e8] p-3 shadow-[0_22px_50px_-24px_rgba(0,0,0,0.4)] ring-1 ring-black/5 sm:p-4">
+          <PromoPoster hero={hero} title={title} />
         </div>
       </div>
     </div>
   );
 }
 
-function EditorFrame({ hero }: { hero: HeroCopy }) {
+function EditorFrame({
+  hero,
+  title,
+  onTitleChange,
+}: {
+  hero: HeroCopy;
+  title: string;
+  onTitleChange: (value: string) => void;
+}) {
   return (
-    <div
-      aria-hidden
-      className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10"
-    >
+    <div className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10">
       <div className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2">
         <div className="hidden items-center gap-3 text-[11px] text-neutral-500 sm:flex">
           <span className="inline-flex items-center gap-1">
@@ -83,30 +92,116 @@ function EditorFrame({ hero }: { hero: HeroCopy }) {
           </RailButton>
         </div>
         <div className="relative flex flex-1 items-center bg-[radial-gradient(circle,#d4d4d8_1px,transparent_1px)] [background-size:14px_14px] p-4 sm:pr-16">
-          <div className="flex w-[min(100%,16rem)] flex-col items-start rounded-lg bg-white p-3 shadow-md ring-1 ring-black/5">
-            <div className="inline-flex rounded-md bg-[#ef3b6a] px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-white">
-              {hero.canvas.badge}
-            </div>
-            <div className="relative mt-8 inline-block max-w-full">
-              <div className="absolute -top-6 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-md bg-white px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 shadow-sm ring-1 ring-black/10">
-                <Move className="size-3" />
-                {hero.tools.position}
-              </div>
-              <div className="text-lg leading-none font-semibold text-[#1a1a2e]">
-                {hero.canvas.title}
-              </div>
-              <span className="pointer-events-none absolute -inset-x-1.5 -inset-y-1 rounded-sm border-2 border-[#2f80ed]" />
-              <Handle className="-top-1.5 -left-2" />
-              <Handle className="-top-1.5 -right-2" />
-              <Handle className="-bottom-1.5 -left-2" />
-              <Handle className="-right-2 -bottom-1.5" />
-            </div>
-            <p className="mt-2 text-[11px] text-neutral-500">
-              {hero.canvas.subtitle}
-            </p>
-          </div>
+          <PromoPoster
+            className="w-[min(100%,17rem)] rounded-lg shadow-md ring-1 ring-black/5"
+            hero={hero}
+            title={title}
+            onTitleChange={onTitleChange}
+          />
         </div>
       </div>
+    </div>
+  );
+}
+
+const titleClass =
+  'text-[clamp(1rem,7.4cqi,1.85rem)] leading-[1.12] font-extrabold tracking-tight';
+
+function PromoPoster({
+  hero,
+  title,
+  onTitleChange,
+  className = 'w-full rounded-2xl shadow-xl',
+}: {
+  hero: HeroCopy;
+  title: string;
+  onTitleChange?: (value: string) => void;
+  className?: string;
+}) {
+  const { canvas } = hero;
+
+  return (
+    <div
+      className={`@container relative aspect-[1024/682] overflow-hidden ${className}`}
+    >
+      <img
+        alt={onTitleChange ? '' : hero.imageAlt}
+        className="absolute inset-0 size-full object-cover"
+        src="/images/hero_product_bg.jpg"
+      />
+      <div className="relative flex h-full flex-col justify-between py-[7%] pr-[46%] pl-[6.5%] text-[#172033]">
+        <div>
+          <span className="inline-flex rounded-md bg-[#ff4d61] px-[0.55em] py-[0.28em] text-[clamp(0.55rem,2.6cqi,0.8rem)] leading-none font-bold tracking-wide text-white">
+            {canvas.badge}
+          </span>
+          {onTitleChange ? (
+            <EditableTitle
+              label={canvas.titleLabel}
+              position={hero.tools.position}
+              title={title}
+              onTitleChange={onTitleChange}
+            />
+          ) : (
+            <p className={`mt-[0.45em] line-clamp-2 ${titleClass}`}>
+              {title || '\u00a0'}
+            </p>
+          )}
+          <p className="mt-[0.35em] text-[clamp(0.62rem,3.15cqi,0.95rem)] leading-snug font-semibold text-[#3c4a63]">
+            {canvas.subtitle}
+          </p>
+          <span className="mt-[0.7em] inline-flex items-center rounded-full bg-[#172033] px-[0.9em] py-[0.42em] text-[clamp(0.55rem,2.5cqi,0.78rem)] leading-none font-medium text-white">
+            {canvas.cta} →
+          </span>
+        </div>
+        <p className="flex items-baseline gap-[0.35em]">
+          <span className="text-[clamp(0.95rem,5.6cqi,1.55rem)] leading-none font-extrabold tracking-tight">
+            {canvas.price}
+          </span>
+          <span className="text-[clamp(0.62rem,3cqi,0.95rem)] leading-none font-semibold text-[#8b93a7] line-through">
+            {canvas.original}
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function EditableTitle({
+  title,
+  label,
+  position,
+  onTitleChange,
+}: {
+  title: string;
+  label: string;
+  position: string;
+  onTitleChange: (value: string) => void;
+}) {
+  return (
+    <div className="relative mt-8 mb-1.5 grid w-max max-w-full">
+      <div className="absolute -top-7 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-md bg-white px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 shadow-sm ring-1 ring-black/10">
+        <Move className="size-3" />
+        {position}
+      </div>
+      <span
+        aria-hidden
+        className={`invisible col-start-1 row-start-1 px-px whitespace-pre ${titleClass}`}
+      >
+        {title || label}
+      </span>
+      <input
+        aria-label={label}
+        className={`col-start-1 row-start-1 w-full min-w-0 bg-transparent px-px outline-none ${titleClass}`}
+        maxLength={16}
+        size={1}
+        value={title}
+        onChange={(event) => onTitleChange(event.target.value)}
+      />
+      <span className="pointer-events-none absolute -inset-x-1.5 -inset-y-1 rounded-sm border-2 border-[#2f80ed]" />
+      <Handle className="-top-1.5 -left-2" />
+      <Handle className="-top-1.5 -right-2" />
+      <Handle className="-bottom-1.5 -left-2" />
+      <Handle className="-right-2 -bottom-1.5" />
     </div>
   );
 }
@@ -132,7 +227,7 @@ function RailButton({
 function Handle({ className }: { className: string }) {
   return (
     <span
-      className={`absolute size-2 border-2 border-[#2f80ed] bg-white ${className}`}
+      className={`pointer-events-none absolute size-2 border-2 border-[#2f80ed] bg-white ${className}`}
     />
   );
 }

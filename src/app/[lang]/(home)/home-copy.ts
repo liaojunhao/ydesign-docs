@@ -18,7 +18,11 @@ export const homeCopy = {
       canvas: {
         badge: 'SALE',
         title: 'Summer edit',
+        titleLabel: 'Title',
         subtitle: 'Selected styles, 50% off',
+        cta: 'Buy now',
+        price: '$49',
+        original: '$99',
       },
     },
     cards: {
@@ -42,8 +46,8 @@ export const homeCopy = {
     },
   },
   cn: {
-    eyebrow: '可视化编辑器 + 出图 API',
-    titleLines: ['用编辑器改模板', '用 API 批量出图'],
+    eyebrow: '面向开发者的可视化编辑器 + 图片生成 API',
+    titleLines: ['基于模板调整编辑', '自动批量出图'],
     description:
       '在编辑器里调整版式、文案和图层，保存为可复用模板。调用 API 传入不同数据，一次生成整批海报、封面和商品图。',
     primaryCta: '开始渲染',
@@ -60,7 +64,11 @@ export const homeCopy = {
       canvas: {
         badge: 'SALE',
         title: '夏季焕新',
+        titleLabel: '标题',
         subtitle: '精选好物 低至5折',
+        cta: '立即购买',
+        price: '¥49',
+        original: '¥99',
       },
     },
     cards: {
