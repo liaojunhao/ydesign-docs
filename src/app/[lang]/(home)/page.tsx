@@ -10,7 +10,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-16 sm:py-24">
       <section className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 text-sm font-medium text-fd-primary">{copy.eyebrow}</p>
+        {/* <p className="mb-3 text-sm font-medium text-fd-primary">{copy.eyebrow}</p> */}
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{copy.title}</h1>
         <p className="mt-4 text-lg text-fd-muted-foreground">{copy.description}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

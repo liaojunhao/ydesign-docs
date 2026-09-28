@@ -8,7 +8,13 @@ export function baseOptions(locale: string): BaseLayoutProps {
     nav: {
       title: (
         <>
-          <img src="/favicon.svg" alt="" width={20} height={20} className="size-5" />
+          <img
+            src="/favicon.svg"
+            alt=""
+            width={20}
+            height={20}
+            className="size-5 dark:invert"
+          />
           {getAppName(locale)}
         </>
       ),
