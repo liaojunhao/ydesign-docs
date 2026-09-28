@@ -15,6 +15,11 @@ export const homeCopy = {
         image: 'Image',
         position: 'Position',
       },
+      variables: {
+        panel: 'Variables',
+        type: 'Text',
+        defaultValue: 'Default',
+      },
       canvas: {
         badge: 'SALE',
         title: 'Summer edit',
@@ -60,6 +65,11 @@ export const homeCopy = {
         text: '文字',
         image: '图片',
         position: '位置',
+      },
+      variables: {
+        panel: '变量',
+        type: '文本',
+        defaultValue: '默认值',
       },
       canvas: {
         badge: 'SALE',
