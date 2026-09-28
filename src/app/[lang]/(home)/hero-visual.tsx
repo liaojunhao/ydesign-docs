@@ -33,7 +33,7 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
   const [title, setTitle] = useState(hero.canvas.title);
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[0_28px_60px_-28px_rgba(15,23,42,0.45)] ring-1 ring-black/10 sm:grid sm:grid-cols-[minmax(0,1.25fr)_minmax(15rem,0.75fr)] sm:grid-rows-[auto_1fr]">
+    <div className="overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[10px_10px_0_rgba(23,33,13,0.18)] ring-1 ring-black/10 sm:grid sm:grid-cols-[minmax(0,1.25fr)_minmax(15rem,0.75fr)] sm:grid-rows-[auto_1fr]">
       <div className="flex items-center gap-3 border-b border-black/5 bg-white px-3 py-2 sm:col-start-1 sm:row-start-1">
         <div className="hidden items-center gap-3 text-[11px] text-neutral-500 sm:flex">
           <span className="inline-flex items-center gap-1">
