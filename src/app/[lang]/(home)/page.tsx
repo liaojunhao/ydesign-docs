@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Image, LayoutGrid, Newspaper, PenTool } from 'lucide-react';
+import { ArrowRight, PenTool } from 'lucide-react';
 import { i18n } from '@/lib/i18n';
+import { HeroVisual } from './hero-visual';
 import { homeCopy } from './home-copy';
 
 export default async function HomePage({ params }: PageProps<'/[lang]'>) {
@@ -8,61 +9,82 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const copy = lang === 'cn' ? homeCopy.cn : homeCopy.en;
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-16 sm:py-24">
-      <section className="mx-auto max-w-2xl text-center">
-        {/* <p className="mb-3 text-sm font-medium text-fd-primary">{copy.eyebrow}</p> */}
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{copy.title}</h1>
-        <p className="mt-4 text-lg text-fd-muted-foreground">{copy.description}</p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href={`/${lang}/docs`}
-            className="inline-flex h-11 items-center rounded-full bg-fd-primary px-5 text-sm font-medium text-fd-primary-foreground hover:opacity-90"
-          >
-            {copy.primaryCta}
-          </Link>
-          <Link
-            href={`/${lang}/docs/editor`}
-            className="inline-flex h-11 items-center rounded-full border bg-fd-secondary px-5 text-sm font-medium text-fd-secondary-foreground hover:bg-fd-accent"
-          >
-            {copy.secondaryCta}
-          </Link>
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-12 sm:px-6 sm:py-20">
+      <section className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:gap-12">
+        <div className="max-w-xl">
+          <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm">
+            <PenTool className="size-3.5" />
+            {copy.eyebrow}
+          </p>
+          <h1 className="mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl sm:leading-[1.12]">
+            {copy.titleLines[0]}
+            <br />
+            {copy.titleLines[1]}
+          </h1>
+          <p className="text-fd-muted-foreground mt-5 text-base leading-relaxed sm:text-lg">
+            {copy.description}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href={`/${lang}/docs`}
+              className="bg-fd-primary text-fd-primary-foreground inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-medium hover:opacity-90"
+            >
+              {copy.primaryCta}
+              <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              href={`/${lang}/docs/editor`}
+              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-5 text-sm font-medium"
+            >
+              {copy.secondaryCta}
+            </Link>
+          </div>
         </div>
+        <HeroVisual hero={copy.hero} />
       </section>
 
-      <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link
           href={`/${lang}/docs`}
-          className="rounded-2xl border bg-fd-card p-6 transition-colors hover:bg-fd-accent/40"
+          className="bg-fd-card hover:bg-fd-accent/40 rounded-2xl border p-6 transition-colors"
         >
-          <Image className="mb-4 size-5 text-fd-primary" />
+          <Image className="text-fd-primary mb-4 size-5" />
           <h2 className="font-semibold">{copy.cards.image.title}</h2>
-          <p className="mt-2 text-sm text-fd-muted-foreground">{copy.cards.image.description}</p>
+          <p className="text-fd-muted-foreground mt-2 text-sm">
+            {copy.cards.image.description}
+          </p>
         </Link>
         <Link
           href={`/${lang}/docs/editor`}
-          className="rounded-2xl border bg-fd-card p-6 transition-colors hover:bg-fd-accent/40"
+          className="bg-fd-card hover:bg-fd-accent/40 rounded-2xl border p-6 transition-colors"
         >
-          <PenTool className="mb-4 size-5 text-fd-primary" />
+          <PenTool className="text-fd-primary mb-4 size-5" />
           <h2 className="font-semibold">{copy.cards.editor.title}</h2>
-          <p className="mt-2 text-sm text-fd-muted-foreground">{copy.cards.editor.description}</p>
+          <p className="text-fd-muted-foreground mt-2 text-sm">
+            {copy.cards.editor.description}
+          </p>
         </Link>
         <Link
           href={`/${lang}/showcase`}
-          className="rounded-2xl border bg-fd-card p-6 transition-colors hover:bg-fd-accent/40"
+          className="bg-fd-card hover:bg-fd-accent/40 rounded-2xl border p-6 transition-colors"
         >
-          <LayoutGrid className="mb-4 size-5 text-fd-primary" />
+          <LayoutGrid className="text-fd-primary mb-4 size-5" />
           <h2 className="font-semibold">{copy.cards.showcase.title}</h2>
-          <p className="mt-2 text-sm text-fd-muted-foreground">{copy.cards.showcase.description}</p>
+          <p className="text-fd-muted-foreground mt-2 text-sm">
+            {copy.cards.showcase.description}
+          </p>
         </Link>
         <Link
           href={`/${lang}/blog`}
-          className="rounded-2xl border bg-fd-card p-6 transition-colors hover:bg-fd-accent/40"
+          className="bg-fd-card hover:bg-fd-accent/40 rounded-2xl border p-6 transition-colors"
         >
-          <Newspaper className="mb-4 size-5 text-fd-primary" />
+          <Newspaper className="text-fd-primary mb-4 size-5" />
           <h2 className="font-semibold">{copy.cards.blog.title}</h2>
-          <p className="mt-2 text-sm text-fd-muted-foreground">{copy.cards.blog.description}</p>
+          <p className="text-fd-muted-foreground mt-2 text-sm">
+            {copy.cards.blog.description}
+          </p>
         </Link>
-      </section>
+      </section> */}
     </main>
   );
 }
