@@ -244,6 +244,37 @@ export const homeCopy = {
         },
       ],
     },
+    closing: {
+      title: 'Start now, free to try',
+      description:
+        '100 free requests on signup.\nConnect in about 5 minutes and stay focused on your product.',
+      cta: 'Get started free',
+      docsCta: 'View docs',
+    },
+    footer: {
+      description:
+        'Call the API to turn HTML into high-quality images. Export WebP, JPEG, and PNG. Use it for share posters, product covers, article covers, and marketing creatives.',
+      product: 'Product',
+      developers: 'Developers',
+      about: 'About',
+      copyright: '© 2026 ydesign. All rights reserved.',
+      productLinks: [
+        { label: 'Image rendering API', href: '/docs' },
+        { label: 'Editor', href: '/docs/editor' },
+        { label: 'Templates', href: '/showcase' },
+        { label: 'AI tools', href: '' },
+      ],
+      developerLinks: [
+        { label: 'Quick start', href: '/docs' },
+        { label: 'Image API docs', href: '/docs' },
+        { label: 'Editor docs', href: '/docs/editor' },
+      ],
+      aboutLinks: [
+        { label: 'Live chat', href: '' },
+        { label: 'Privacy policy', href: '' },
+        { label: 'Terms of service', href: '' },
+      ],
+    },
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -526,6 +557,36 @@ export const homeCopy = {
             '可以，n8n 提供了 HTTP Request 节点，可以轻松调用 ydesign 的 API。请参考 ',
           link: 'https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest',
         },
+      ],
+    },
+    closing: {
+      title: '立即开始，免费试用',
+      description: '注册即送 100 次免费请求\n5 分钟接入，专注于构建你的产品',
+      cta: '免费开始使用',
+      docsCta: '查看文档',
+    },
+    footer: {
+      description:
+        '调用 API 将 HTML 转换为高质量图片，支持输出 Webp、Jpeg、Png 格式。可用于生成分享海报、商品封面、文章封面、营销海报等。',
+      product: '产品',
+      developers: '开发者',
+      about: '关于',
+      copyright: '© 2026 ydesign. 保留所有权利。',
+      productLinks: [
+        { label: '图片渲染 API', href: '/docs' },
+        { label: '编辑器', href: '/docs/editor' },
+        { label: '模板库', href: '/showcase' },
+        { label: 'AI 工具', href: '' },
+      ],
+      developerLinks: [
+        { label: '快速开始', href: '/docs' },
+        { label: '图片 API 文档', href: '/docs' },
+        { label: '编辑器文档', href: '/docs/editor' },
+      ],
+      aboutLinks: [
+        { label: '在线客服', href: '' },
+        { label: '隐私政策', href: '' },
+        { label: '服务条款', href: '' },
       ],
     },
     hero: {

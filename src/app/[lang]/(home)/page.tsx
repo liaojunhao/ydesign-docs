@@ -4,6 +4,7 @@ import { i18n } from '@/lib/i18n';
 import { HeroVisual } from './hero-visual';
 import { homeCopy } from './home-copy';
 import { ScenariosSection } from './scenarios-section';
+import { ClosingSection } from './closing-section';
 import { FaqSection } from './faq-section';
 import { FeaturesSection } from './features-section';
 import { PricingSection } from './pricing-section';
@@ -15,7 +16,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const copy = lang === 'cn' ? homeCopy.cn : homeCopy.en;
 
   return (
-    <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-28">
+    <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 pt-12 pb-8 sm:pt-28 sm:pb-10">
       <section className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
         <div className="flex h-full flex-col">
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">
@@ -69,6 +70,11 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
       />
       <PricingSection copy={copy.pricing} href={`/${lang}/docs`} />
       <FaqSection copy={copy.faq} />
+      <ClosingSection
+        copy={copy.closing}
+        href={`/${lang}/docs`}
+        docsHref={`/${lang}/docs`}
+      />
 
       {/* <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link
