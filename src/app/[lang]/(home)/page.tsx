@@ -4,6 +4,7 @@ import { i18n } from '@/lib/i18n';
 import { HeroVisual } from './hero-visual';
 import { homeCopy } from './home-copy';
 import { ScenariosSection } from './scenarios-section';
+import { TemplatesSection } from './templates-section';
 
 export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
@@ -51,6 +52,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
       </section>
 
       <ScenariosSection copy={copy.scenarios} />
+      <TemplatesSection copy={copy.templates} href={`/${lang}/showcase`} />
 
       {/* <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link

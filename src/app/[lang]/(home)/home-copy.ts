@@ -40,6 +40,46 @@ export const homeCopy = {
         },
       ],
     },
+    templates: {
+      eyebrow: 'Template inspiration',
+      title: 'Start from a good template',
+      description:
+        'Start quickly with a ready-made template, or design from scratch with HTML + CSS.',
+      more: 'View more templates',
+      items: [
+        {
+          category: 'Social share card',
+          title: 'Xiaoyuzhou podcast share card',
+          description:
+            'A podcast episode card with cover art, episode title, host, and a listen QR code.',
+          size: '640 × 360',
+          image: '',
+        },
+        {
+          category: 'Profile card',
+          title: 'Twitter profile card',
+          description:
+            'A social profile card showing avatar, name, bio, and follow counts.',
+          size: '1200 × 630',
+          image: '',
+        },
+        {
+          category: 'Article cover',
+          title: 'Blog article cover',
+          description:
+            'A technical article cover with category, publish date, title, and author.',
+          size: '1200 × 630',
+          image: '',
+        },
+        {
+          category: '',
+          title: 'Blank template',
+          description: 'A blank template you can take in any direction.',
+          size: '640 × 360',
+          image: '',
+        },
+      ],
+    },
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -122,6 +162,43 @@ export const homeCopy = {
           title: '文章封面',
           description:
             'CMS 发布内容时自动生成符合品牌规范的文章封面与 Open Graph 图片。',
+          image: '',
+        },
+      ],
+    },
+    templates: {
+      eyebrow: '模板灵感',
+      title: '从一个好模板开始',
+      description: '使用现成模板快速开始，也可以用 HTML + CSS 从零开始设计。',
+      more: '查看更多模板',
+      items: [
+        {
+          category: '社交分享卡',
+          title: '小宇宙播客节目分享卡片',
+          description:
+            '播客单集分享卡，含节目封面、单集标题、主播与收听二维码。',
+          size: '640 × 360',
+          image: '',
+        },
+        {
+          category: '个人名片',
+          title: 'Twitter 账号片卡',
+          description: '社交账号片卡，展示头像、昵称、简介与关注数据。',
+          size: '1200 × 630',
+          image: '',
+        },
+        {
+          category: '文章封面',
+          title: '博客文章封面',
+          description: '技术文章封面，含分类标签、发布日期、大标题与作者信息。',
+          size: '1200 × 630',
+          image: '',
+        },
+        {
+          category: '',
+          title: '空白模板',
+          description: '空白模板，可以自由发挥。',
+          size: '640 × 360',
           image: '',
         },
       ],
