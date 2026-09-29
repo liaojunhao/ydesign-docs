@@ -4,6 +4,8 @@ import { i18n } from '@/lib/i18n';
 import { HeroVisual } from './hero-visual';
 import { homeCopy } from './home-copy';
 import { ScenariosSection } from './scenarios-section';
+import { FeaturesSection } from './features-section';
+import { MethodsSection } from './methods-section';
 import { TemplatesSection } from './templates-section';
 
 export default async function HomePage({ params }: PageProps<'/[lang]'>) {
@@ -57,6 +59,12 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
       <ScenariosSection copy={copy.scenarios} />
       <TemplatesSection copy={copy.templates} href={`/${lang}/showcase`} />
+      <FeaturesSection copy={copy.features} />
+      <MethodsSection
+        copy={copy.methods}
+        rawHref={`/${lang}/docs`}
+        templateHref={`/${lang}/docs/variables`}
+      />
 
       {/* <section className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link

@@ -80,6 +80,80 @@ export const homeCopy = {
         },
       ],
     },
+    features: {
+      eyebrow: 'Features',
+      title: 'Control every detail with HTML + CSS',
+      description:
+        'From a simple API call to a fully custom template, ydesign covers the image generation you need.',
+      items: [
+        {
+          icon: 'sliders',
+          title: 'Fully customizable',
+          description:
+            'Control layout, color, spacing, and style. Any Tailwind class or inline style can match the brand.',
+        },
+        {
+          icon: 'type',
+          title: 'Broad font support',
+          description:
+            '10+ commercially free fonts are built in, and custom fonts work too. Chinese, English, Japanese, Korean, and emoji render without extra setup.',
+        },
+        {
+          icon: 'zap',
+          title: 'Fast generation',
+          description:
+            'P99 response time is under 1s. Rendering does not go through a browser, so the ceiling is higher.',
+        },
+        {
+          icon: 'globe',
+          title: 'Multiple output formats',
+          description:
+            'Export PNG, JPEG, and WebP, and set resolution and quality for each platform.',
+        },
+      ],
+    },
+    methods: {
+      eyebrow: 'Rendering',
+      title: 'One piece of content, two ways to render',
+      template: {
+        label: 'Method 01',
+        title: 'Render from a reusable template',
+        description:
+          'Save the HTML + CSS as a template, then pass only the variables. Built for batch jobs, automation, and a consistent brand look. This covers most cases.',
+        steps: [
+          {
+            title: 'Design the template',
+            description: 'Write a reusable template with HTML / JSX + CSS',
+          },
+          {
+            title: 'Set variables',
+            description:
+              'Turn the title, image, price, and other content into parameters',
+          },
+          {
+            title: 'Call the API',
+            description: "Send the template ID and this render's data",
+          },
+          {
+            title: 'Get the image',
+            description: 'Receive an image URL you can use directly',
+          },
+        ],
+      },
+      raw: {
+        label: 'Method 02',
+        title: 'Pass the full HTML + CSS',
+        description:
+          'Send the HTML and CSS needed for each render. Better when the structure changes a lot and you want full control.',
+        request: 'POST /v1/render',
+        body: `{
+  "content": "<div>...</div>",
+  "width": 640,
+  "height": 360,
+  "format": "png"
+}`,
+      },
+    },
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -202,6 +276,78 @@ export const homeCopy = {
           image: '',
         },
       ],
+    },
+    features: {
+      eyebrow: '功能特性',
+      title: '用 HTML + CSS 控制每一处细节',
+      description:
+        '从简单的 API 调用到复杂的自定义模板，ydesign 覆盖你所需的一切图片生成场景。',
+      items: [
+        {
+          icon: 'sliders',
+          title: '高度可定制',
+          description:
+            '完全控制布局、颜色、间距和样式。支持任意 Tailwind 类和内联样式，生成完全符合品牌调性的图片。',
+        },
+        {
+          icon: 'type',
+          title: '多种字体支持',
+          description:
+            '内置 10+ 免费商用字体，也支持自定义字体。中文、英文、日文、韩文、Emoji 完美渲染，无需额外配置。',
+        },
+        {
+          icon: 'zap',
+          title: '高性能生成',
+          description: 'P99 响应时间 < 1s。不基于浏览器渲染，性能上限更高。',
+        },
+        {
+          icon: 'globe',
+          title: '多种输出格式',
+          description:
+            '支持 PNG、JPEG、WebP 输出，可指定分辨率和质量参数，满足不同平台的图片规格要求。',
+        },
+      ],
+    },
+    methods: {
+      eyebrow: '渲染方式',
+      title: '同一套内容，两种渲染方式',
+      template: {
+        label: '方式 01',
+        title: '基于可复用模板渲染',
+        description:
+          '先将 HTML + CSS 保存为模板，调用时只传变量。适合批量、自动化和品牌视觉一致的生产场景。适用于大部分场景。',
+        steps: [
+          {
+            title: '设计模板',
+            description: '使用 HTML / JSX + CSS 编写可复用模板',
+          },
+          {
+            title: '设置变量',
+            description: '把标题、图片、价格等内容参数化',
+          },
+          {
+            title: '调用 API',
+            description: '传入模板 ID 与本次渲染的数据',
+          },
+          {
+            title: '获得图片',
+            description: '返回可直接使用的图片 URL',
+          },
+        ],
+      },
+      raw: {
+        label: '方式 02',
+        title: '完整传入 HTML + CSS',
+        description:
+          '将每次渲染需要的 HTML 与 CSS 完整传入。适合内容结构变化较大、希望完全自行控制的场景。',
+        request: 'POST /v1/render',
+        body: `{
+  "content": "<div>...</div>",
+  "width": 640,
+  "height": 360,
+  "format": "png"
+}`,
+      },
     },
     hero: {
       editor: '编辑器',
