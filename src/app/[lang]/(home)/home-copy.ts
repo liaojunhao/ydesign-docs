@@ -7,6 +7,39 @@ export const homeCopy = {
     primaryCta: 'Start rendering',
     imageDocsCta: 'Image rendering docs',
     editorDocsCta: 'Editor docs',
+    scenarios: {
+      eyebrow: 'Use cases',
+      title: 'Generate every image automatically',
+      description:
+        'Keep a consistent look with a template, then pass changing data to generate matching images. No more opening a design tool to export each one.',
+      placeholder: 'Image placeholder',
+      items: [
+        {
+          title: 'E-commerce product images',
+          description:
+            'Batch-generate matching hero images, promo shots, and price cards from product data, without exporting them one by one.',
+          image: '',
+        },
+        {
+          title: 'Social covers',
+          description:
+            'One template fits multiple social sizes, so campaigns, brand, and product posts stay consistent.',
+          image: '',
+        },
+        {
+          title: 'Share posters',
+          description:
+            'Automatically create posters for blog posts, product updates, and event notices, so they travel better on social.',
+          image: '',
+        },
+        {
+          title: 'Article covers',
+          description:
+            'When a CMS publishes, generate on-brand article covers and Open Graph images.',
+          image: '',
+        },
+      ],
+    },
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -60,6 +93,39 @@ export const homeCopy = {
     primaryCta: '开始渲染',
     imageDocsCta: '图片渲染文档',
     editorDocsCta: '编辑器文档',
+    scenarios: {
+      eyebrow: '应用场景',
+      title: '自动生成每张图片',
+      description:
+        '使用模板保持视觉一致，传入动态变化的数据即可快速生成视觉一致的图片。无需反复打开设计工具导出图片。',
+      placeholder: '占位图',
+      items: [
+        {
+          title: '电商商品图',
+          description:
+            '根据商品数据批量生成统一风格的主图、促销图和价格卡片，告别重复导出',
+          image: '',
+        },
+        {
+          title: '社交媒体封面',
+          description:
+            '一套模板适配多个社交平台尺寸，让活动、品牌与产品内容持续保持一致。',
+          image: '',
+        },
+        {
+          title: '分享海报',
+          description:
+            '为博客文章、产品更新、活动通知自动生成精美海报，提升社交传播效果。',
+          image: '',
+        },
+        {
+          title: '文章封面',
+          description:
+            'CMS 发布内容时自动生成符合品牌规范的文章封面与 Open Graph 图片。',
+          image: '',
+        },
+      ],
+    },
     hero: {
       editor: '编辑器',
       preview: '预览',
