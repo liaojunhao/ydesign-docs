@@ -154,6 +154,96 @@ export const homeCopy = {
 }`,
       },
     },
+    pricing: {
+      eyebrow: 'Pricing',
+      title: 'Simple, transparent pricing',
+      description: 'Free to try, then pay as you go',
+      popular: 'Most popular',
+      plans: [
+        {
+          name: 'Free',
+          price: '¥0',
+          unit: '',
+          description: 'For personal developers and small projects.',
+          cta: 'Get started free',
+          highlighted: false,
+          features: [
+            '100 requests on signup',
+            'PNG / JPEG / WebP output',
+            'Standard generation speed',
+            'Community support',
+          ],
+        },
+        {
+          name: 'Pro',
+          price: '¥0.005',
+          unit: '/ request',
+          description: 'Pay for what you use. No monthly fee, stop anytime.',
+          cta: 'Upgrade',
+          highlighted: true,
+          features: [
+            'Usage-based billing',
+            'PNG / JPEG / WebP output',
+            'Priority queue',
+            'Custom font URLs',
+            'Email support',
+          ],
+        },
+        {
+          name: 'Enterprise',
+          price: 'Private deploy',
+          unit: '',
+          description: 'For large scale, high concurrency, and custom needs.',
+          cta: 'Contact sales',
+          highlighted: false,
+          features: [
+            'Private deployment',
+            'Unlimited requests',
+            'Every feature',
+            'Dedicated manager',
+            'Custom contract',
+          ],
+        },
+      ],
+    },
+    faq: {
+      eyebrow: 'FAQ',
+      title: 'You might be wondering',
+      description:
+        'Common questions about the ydesign image API. See the docs for the technical details.',
+      items: [
+        {
+          question: 'What does the free plan include?',
+          answer:
+            'Signing up includes 100 requests, enough to try the full feature set.',
+          link: '',
+        },
+        {
+          question: 'Which languages can I use to call ydesign?',
+          answer:
+            'Any language that can make an HTTP request. For example: Python, JavaScript, PHP, Java, C#, Go, Ruby, and Swift.',
+          link: '',
+        },
+        {
+          question: 'Can I use it in Dify?',
+          answer:
+            'Yes. Dify has an HTTP Request node, so you can call the ydesign API. See ',
+          link: 'https://docs.dify.ai/en/cloud/use-dify/nodes/http-request',
+        },
+        {
+          question: 'Can I use it in Coze?',
+          answer:
+            'Yes. Coze has an HTTP Request node, so you can call the ydesign API. See ',
+          link: 'https://docs.coze.cn/guides_http_node',
+        },
+        {
+          question: 'Can I use it in n8n?',
+          answer:
+            'Yes. n8n has an HTTP Request node, so you can call the ydesign API. See ',
+          link: 'https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest',
+        },
+      ],
+    },
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -348,6 +438,95 @@ export const homeCopy = {
   "format": "png"
 }`,
       },
+    },
+    pricing: {
+      eyebrow: '定价',
+      title: '简单透明的定价',
+      description: '免费试用，按量付费',
+      popular: '最受欢迎',
+      plans: [
+        {
+          name: '免费版',
+          price: '¥0',
+          unit: '',
+          description: '适合个人开发者和小型项目试用。',
+          cta: '免费开始',
+          highlighted: false,
+          features: [
+            '注册即送 100 次',
+            'PNG / JPEG / WebP 输出',
+            '标准生成速度',
+            '社区支持',
+          ],
+        },
+        {
+          name: '专业版',
+          price: '¥0.005',
+          unit: '/ 次',
+          description: '按用量付费，无月租，随用随停。',
+          cta: '立即升级',
+          highlighted: true,
+          features: [
+            '按量计费',
+            'PNG / JPEG / WebP 输出',
+            '优先生成队列',
+            '自定义字体 URL',
+            '邮件支持',
+          ],
+        },
+        {
+          name: '企业版',
+          price: '私有部署',
+          unit: '',
+          description: '大规模、高并发、定制化需求。',
+          cta: '联系销售',
+          highlighted: false,
+          features: [
+            '私有化部署',
+            '无限制请求量',
+            '所有功能',
+            '专属客户经理',
+            '自定义合同',
+          ],
+        },
+      ],
+    },
+    faq: {
+      eyebrow: '常见问题',
+      title: '你可能想知道',
+      description:
+        '关于 ydesign 图片生成 API 的常见问题。更多技术细节可以查看文档。',
+      items: [
+        {
+          question: '免费套餐包含什么？',
+          answer: '注册即送100次请求，可以体验到完整的功能',
+          link: '',
+        },
+        {
+          question: '我可以使用哪些编程语言接入 ydesign？',
+          answer:
+            '任何能够发起 HTTP 请求的编程语言都可以。例如：Python、JavaScript、PHP、Java、C#、Go、Ruby、Swift 等。',
+          link: '',
+        },
+        {
+          question: '可以在 Dify 中使用吗？',
+          answer:
+            '可以，Dify 提供了 HTTP Request 节点，可以轻松调用 ydesign 的 API。请参考 ',
+          link: 'https://docs.dify.ai/en/cloud/use-dify/nodes/http-request',
+        },
+        {
+          question: '可以在扣子（Coze）中使用吗？',
+          answer:
+            '可以，扣子（Coze）提供了 HTTP Request 节点，可以轻松调用 ydesign 的 API。请参考 ',
+          link: 'https://docs.coze.cn/guides_http_node',
+        },
+        {
+          question: '可以在 n8n 中使用吗？',
+          answer:
+            '可以，n8n 提供了 HTTP Request 节点，可以轻松调用 ydesign 的 API。请参考 ',
+          link: 'https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest',
+        },
+      ],
     },
     hero: {
       editor: '编辑器',
