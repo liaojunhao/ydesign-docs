@@ -5,7 +5,8 @@ export const homeCopy = {
     description:
       'Adjust the template, then pass different data to the API and batch-render posters and product images.',
     primaryCta: 'Start rendering',
-    secondaryCta: 'View docs',
+    imageDocsCta: 'Image rendering docs',
+    editorDocsCta: 'Editor docs',
     hero: {
       editor: 'Editor',
       preview: 'Preview',
@@ -57,7 +58,8 @@ export const homeCopy = {
     description:
       '在编辑器里调整版式和文案，保存为可复用模板。传入不同数据，一次生成整批海报和商品图。',
     primaryCta: '开始渲染',
-    secondaryCta: '查看文档',
+    imageDocsCta: '图片渲染文档',
+    editorDocsCta: '编辑器文档',
     hero: {
       editor: '编辑器',
       preview: '预览',

@@ -33,10 +33,16 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
               <ArrowRight className="size-4" />
             </Link>
             <Link
+              href={`/${lang}/docs`}
+              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-5 text-sm font-medium"
+            >
+              {copy.imageDocsCta}
+            </Link>
+            <Link
               href={`/${lang}/docs/editor`}
               className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-5 text-sm font-medium"
             >
-              {copy.secondaryCta}
+              {copy.editorDocsCta}
             </Link>
           </div>
         </div>
