@@ -43,7 +43,7 @@ export function TemplatesSection({
               className="group overflow-hidden rounded-2xl border border-black/10 bg-white transition-colors hover:border-black/25 dark:border-white/10 dark:bg-[#1c1916] dark:hover:border-white/25"
             >
               <Link href={href} title={item.title} className="block">
-                <div className="relative aspect-video overflow-hidden bg-[#f5f1e8] dark:bg-[#141210]">
+                <div className="relative aspect-video overflow-hidden bg-[#e8e8e8] dark:bg-[#3a3632]">
                   {item.image ? (
                     <img
                       alt={item.title}

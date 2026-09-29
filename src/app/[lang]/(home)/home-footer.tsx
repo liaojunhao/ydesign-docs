@@ -28,21 +28,39 @@ export function HomeFooter({
       <div className="mx-auto w-full max-w-(--fd-layout-width)">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between">
           <div className="max-w-xs">
-            <Link href={`/${lang}`} className="text-lg font-bold text-white">
+            <Link
+              href={`/${lang}`}
+              className="inline-flex items-center gap-2 text-lg font-bold text-white"
+            >
+              <img
+                src="/favicon.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="size-5 invert"
+              />
               {brand}
             </Link>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
               {copy.description}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            <FooterColumn title={copy.product} lang={lang} links={copy.productLinks} />
+          <div className="grid grid-cols-2 gap-16 sm:grid-cols-3">
+            <FooterColumn
+              title={copy.product}
+              lang={lang}
+              links={copy.productLinks}
+            />
             <FooterColumn
               title={copy.developers}
               lang={lang}
               links={copy.developerLinks}
             />
-            <FooterColumn title={copy.about} lang={lang} links={copy.aboutLinks} />
+            <FooterColumn
+              title={copy.about}
+              lang={lang}
+              links={copy.aboutLinks}
+            />
           </div>
         </div>
         <div className="mt-8 border-t border-white/15 pt-5">
@@ -63,7 +81,7 @@ function FooterColumn({
   links: readonly FooterLink[];
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-6">
       <p className="text-xs font-semibold tracking-widest text-white/60 uppercase">
         {title}
       </p>
