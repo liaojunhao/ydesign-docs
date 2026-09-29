@@ -5,7 +5,7 @@ export const homeCopy = {
     description:
       'Adjust the template, then pass different data to the API and batch-render posters and product images.',
     primaryCta: 'Start rendering',
-    imageDocsCta: 'Image rendering docs',
+    imageDocsCta: 'Image docs',
     editorDocsCta: 'Editor docs',
     scenarios: {
       eyebrow: 'Use cases',

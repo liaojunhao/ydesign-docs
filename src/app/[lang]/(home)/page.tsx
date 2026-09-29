@@ -13,12 +13,16 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   return (
     <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 py-12 sm:py-28">
       <section className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
-        <div className="flex flex-col">
+        <div className="flex h-full flex-col">
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">
             <PenTool className="size-3.5" />
             {copy.eyebrow}
           </p>
-          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-[2.5rem] sm:leading-[1.2]">
+          <h1
+            className={`mt-5 text-3xl font-semibold tracking-tight sm:leading-[1.2] ${
+              lang === 'cn' ? 'sm:text-[2.5rem]' : 'sm:text-[2rem]'
+            }`}
+          >
             {copy.titleLines[0]}
             <br />
             {copy.titleLines[1]}
@@ -26,23 +30,23 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           <p className="text-fd-muted-foreground mt-4 text-sm leading-relaxed sm:text-base">
             {copy.description}
           </p>
-          <div className="flex flex-wrap items-center gap-3 lg:pt-8">
+          <div className="mt-8 flex flex-wrap items-center gap-2">
             <Link
               href={`/${lang}/docs`}
-              className="bg-fd-primary text-fd-primary-foreground inline-flex h-11 items-center gap-2 rounded-lg px-5 text-sm font-medium hover:opacity-90"
+              className="bg-fd-primary text-fd-primary-foreground inline-flex h-11 items-center gap-2 rounded-lg px-4 text-sm font-medium whitespace-nowrap hover:opacity-90"
             >
               {copy.primaryCta}
               <ArrowRight className="size-4" />
             </Link>
             <Link
               href={`/${lang}/docs`}
-              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-5 text-sm font-medium"
+              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-4 text-sm font-medium whitespace-nowrap"
             >
               {copy.imageDocsCta}
             </Link>
             <Link
               href={`/${lang}/docs/editor`}
-              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-5 text-sm font-medium"
+              className="bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent inline-flex h-11 items-center rounded-lg border px-4 text-sm font-medium whitespace-nowrap"
             >
               {copy.editorDocsCta}
             </Link>

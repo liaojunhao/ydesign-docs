@@ -39,8 +39,8 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
   const [title, setTitle] = useState(hero.canvas.title);
 
   return (
-    <div className="@container overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[10px_10px_0_rgba(23,33,13,0.18)] ring-1 ring-black/10">
-      <div className="flex flex-col @min-[36rem]:grid @min-[36rem]:grid-cols-[minmax(0,1.15fr)_minmax(9.75rem,11rem)_minmax(0,0.95fr)]">
+    <div className="@container h-full overflow-hidden rounded-2xl bg-[#f3f4f6] shadow-[10px_10px_0_rgba(23,33,13,0.18)] ring-1 ring-black/10">
+      <div className="flex h-full flex-col @min-[36rem]:grid @min-[36rem]:grid-cols-[minmax(0,1.15fr)_minmax(9.75rem,11rem)_minmax(0,0.95fr)]">
         <section className="@container/editor flex min-w-0 flex-col">
           <div className="flex h-10 items-center gap-2 border-b border-black/5 bg-white px-3">
             <div className="hidden min-w-0 items-center gap-2 text-[11px] text-neutral-500 sm:flex">
