@@ -10,6 +10,7 @@ import { FeaturesSection } from './features-section';
 import { PricingSection } from './pricing-section';
 import { MethodsSection } from './methods-section';
 import { TemplatesSection } from './templates-section';
+import { HashScroll } from './hash-scroll';
 
 export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
@@ -17,6 +18,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
 
   return (
     <main className="mx-auto flex w-full max-w-(--fd-layout-width) flex-1 flex-col px-4 pt-12 pb-8 sm:pt-28 sm:pb-10">
+      <HashScroll />
       <section className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
         <div className="flex h-full flex-col">
           <p className="border-fd-border bg-fd-card text-fd-muted-foreground inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm">

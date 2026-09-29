@@ -29,6 +29,11 @@ export function baseOptions(locale: string): BaseLayoutProps {
       },
       {
         type: 'main',
+        text: isCn ? '定价' : 'Pricing',
+        url: `/${locale}/#pricing`,
+      },
+      {
+        type: 'main',
         text: isCn ? '博客' : 'Blog',
         url: `/${locale}/blog`,
       },

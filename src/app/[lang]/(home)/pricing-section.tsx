@@ -25,7 +25,10 @@ export function PricingSection({
   href: string;
 }) {
   return (
-    <section className="border-fd-border mt-16 border-t py-16 md:mt-20 md:py-20">
+    <section
+      id="pricing"
+      className="border-fd-border mt-16 scroll-mt-24 border-t py-16 md:mt-20 md:py-20"
+    >
       <div className="mb-10 text-center">
         <p className="mb-3 text-xs font-medium tracking-widest text-[#5645d4] dark:text-[#c4b6ff]">
           {copy.eyebrow}
