@@ -1,0 +1,191 @@
+---
+title: Overview
+description: Introduction to ydesign, a JavaScript library for creating canvas editors
+---
+
+
+
+**ydesign** is an opinionated JavaScript library and set of React components designed to create canvas editors tailored for various business applications. The SDK provides a complete visual editor framework for building white-label design tools, template systems, and programmatic image generation.
+
+There are many powerful JavaScript frameworks and tools that can help you make a canvas editor. But almost all of them are 'low-level' in nature. Take [Fabric.js](https://fabricjs.com/) for example – it's a great 2D canvas framework; but you'd need to write **a lot of code** to make a full canvas editor app.
+
+ydesign is a simple tool that solves a focused set of business problems. It is fast and we are committed to keeping the API as light as possible. So you can just drop it on the page and get a full featured design suite.
+
+## Quick Start (React)
+
+### 1. Install @ydesign/react-editor
+
+```bash
+npm install @ydesign/react-editor
+```
+
+### 2. Create Editor component
+
+```tsx
+import React from 'react';
+import { YdesignContainer, SidePanelWrap, WorkspaceWrap } from '@ydesign/react-editor';
+import { Toolbar } from '@ydesign/react-editor/toolbar/toolbar';
+import { PagesTimeline } from '@ydesign/react-editor/pages-timeline';
+import { ZoomButtons } from '@ydesign/react-editor/toolbar/zoom-buttons';
+import { SidePanel } from '@ydesign/react-editor/side-panel';
+import { Workspace } from '@ydesign/react-editor/canvas/workspace';
+
+import '@ydesign/react-editor/style.css';
+
+import { createStore } from '@ydesign/react-editor/model/store';
+
+const store = createStore({
+  key: 'YOUR_API_KEY', // create it in the console
+  // you can hide the back-link on a paid license
+  // keeping it helps support the ydesign project
+  showCredit: true,
+});
+const page = store.addPage();
+
+export const Editor = () => {
+  return (
+    <YdesignContainer style={{ width: '100vw', height: '100vh' }}>
+      <SidePanelWrap>
+        <SidePanel store={store} />
+      </SidePanelWrap>
+      <WorkspaceWrap>
+        <Toolbar store={store} downloadButtonEnabled />
+        <Workspace store={store} />
+        <ZoomButtons store={store} />
+        <PagesTimeline store={store} />
+      </WorkspaceWrap>
+    </YdesignContainer>
+  );
+};
+```
+
+### 3. Use the component in your app
+
+```tsx
+import { Editor } from './editor';
+
+const App = () => {
+  return <Editor />
+}
+```
+
+## Quick Start (No Frameworks)
+
+```javascript
+import { createDemoApp } from '@ydesign/react-editor/editor-app';
+
+// editor styles (Tailwind, with shadcn components bundled in the package)
+import '@ydesign/react-editor/style.css';
+
+const { store } = createDemoApp({
+  container: document.getElementById('root'),
+  key: 'YOUR_API_KEY', // create it in the console
+  // you can hide the back-link on a paid license
+  // keeping it helps support the ydesign project
+  showCredit: true,
+});
+```
+
+Without a bundler, load the built stylesheet:
+
+```html
+<link rel="stylesheet" href="./style.css" />
+```
+
+## Core Concepts
+
+### Store
+
+The [Store](/docs/store) is the main object to control data and elements of the canvas. It provides API for adding/updating/removing canvas objects, undo/redo, selection changes, zooming, and [export/import operations](/docs/import-and-export).
+
+```javascript
+import { createStore } from '@ydesign/react-editor/model/store';
+
+const store = createStore();
+const page = store.addPage();
+
+page.addElement({
+  x: 50,
+  y: 50,
+  type: 'text',
+  fill: 'black',
+  text: 'hello',
+});
+```
+
+### Workspace React Canvas Component
+
+React component for drawing the canvas on the page. It comes with basic functionality for common edits: selection, resize, drawing objects, snapping, and so on.
+
+```tsx
+import Workspace from '@ydesign/react-editor/canvas/workspace';
+
+const App = () => {
+  return <Workspace store={store} />;
+};
+```
+
+### UI Components
+
+A set of React components for a general canvas editor app.
+
+- a toolbar for basic object actions (align, remove, change styles, and so on)
+- side panels for adding new objects
+- zoom buttons
+- and more
+
+```tsx
+import { YdesignContainer, SidePanelWrap, WorkspaceWrap } from '@ydesign/react-editor';
+import { Toolbar } from '@ydesign/react-editor/toolbar/toolbar';
+import { ZoomButtons } from '@ydesign/react-editor/toolbar/zoom-buttons';
+import { SidePanel } from '@ydesign/react-editor/side-panel';
+import { Workspace } from '@ydesign/react-editor/canvas/workspace';
+
+export const App = ({ store }) => {
+  return (
+    <YdesignContainer style={{ width: '100vw', height: '100vh' }}>
+      <SidePanelWrap>
+        <SidePanel store={store} />
+      </SidePanelWrap>
+      <WorkspaceWrap>
+        <Toolbar store={store} downloadButtonEnabled />
+        <Workspace store={store} />
+        <ZoomButtons store={store} />
+      </WorkspaceWrap>
+    </YdesignContainer>
+  );
+};
+```
+
+### Styles
+
+The ydesign UI is written with [Tailwind CSS](https://tailwindcss.com/). Components are the [shadcn/ui](https://ui.shadcn.com/) set already bundled in the package, so you do not install a separate UI kit.
+
+Icons come from [Lucide](https://lucide.dev/) (`lucide-react`). Import them from `lucide-react` when you add a custom side panel or toolbar.
+
+Load the stylesheet at the app entry. Theme colors come from the semantic CSS variables in that file, using the same convention as shadcn:
+
+```ts
+import '@ydesign/react-editor/style.css';
+```
+
+If the host app already uses Tailwind and shadcn, the editor follows the same color variables. The SDK also includes `ThemeSwitcher` for light, dark, and the primary color. No extra token package is required.
+
+For custom UI, prefer Tailwind classes and shadcn components so spacing, color, and radius match the editor.
+
+### Reactivity
+
+The core of ydesign is built with [MobX](https://mobx.js.org/). Use the MobX API together with [mobx-state-tree](https://mobx-state-tree.js.org/intro/welcome) to add reactivity to your own application. In React, wrap components with `observer()`.
+
+```tsx
+import { observer } from 'mobx-react-lite';
+
+const App = observer(({ store }) => {
+  return (
+    <div>
+      <p>Here we will define our own custom tab.</p>
+      <p>Elements on the current page: {store.activePage?.children.length}</p>
+    </div>
+  );
+});
+```

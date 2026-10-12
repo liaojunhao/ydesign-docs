@@ -1,0 +1,121 @@
+---
+title: Editor configuration
+description: Configure uploads, translations, and fonts in ydesign
+---
+
+## How to change image upload behavior?
+
+The default [Side Panel](/docs/side-panel-overview) has an Upload tab to import local images into the project. By default, ydesign turns a local file into a blob URL and uses that URL as the `image` element source. A blob URL only works on the current page. It breaks after a refresh and should not be stored in saved [JSON](/docs/import-and-export).
+
+**It is highly recommended to upload images to your server.** This keeps JSON smaller, easier to read, and improves canvas performance.
+
+To upload local images to your server, use:
+
+```ts
+import { setUploadFunc } from '@ydesign/react-editor/side-panel/upload-panel';
+
+// define your upload function (implement your API logic here)
+async function upload(localFile: File) {
+  const formData = new FormData();
+  formData.append('files[]', localFile);
+  const res = await fetch(yourServerURL, {
+    method: 'POST',
+    body: formData,
+  });
+  const json = await res.json();
+  const { url } = json;
+  // return a simple and short URL
+  return url as string;
+}
+
+setUploadFunc(upload);
+```
+
+`setUploadFunc` takes `(file: File) => Promise<string>`. The returned string becomes the image `src`.
+
+## How to change font upload behavior?
+
+The SDK does not expose a separate font-upload hook. Upload the font file to your server, then register it on the store:
+
+```ts
+store.addFont({
+  fontFamily: 'MyFont',
+  url: 'https://example.com/fonts/my-font.woff2',
+  name: 'My font',
+});
+await store.loadFont('MyFont');
+```
+
+`store.addFont` keeps the font with the design. For an app-wide font that is not stored in the design JSON, use a global font:
+
+```ts
+import { addGlobalFont } from '@ydesign/react-editor/utils/fonts';
+
+addGlobalFont({
+  fontFamily: 'MyFont',
+  url: 'https://example.com/fonts/my-font.woff2',
+  name: 'My font',
+});
+```
+
+## How to translate UI?
+
+To translate the UI or change some labels, use:
+
+```ts
+import { setTranslations } from '@ydesign/react-editor/config';
+
+setTranslations(
+  {
+    sidePanel: {
+      text: 'Text',
+      myFonts: 'My fonts',
+    },
+  },
+  {
+    validate: true, // set to false if you don't need validation
+  }
+);
+```
+
+To inspect the full translation schema:
+
+```ts
+import { getTranslations } from '@ydesign/react-editor/config';
+
+// log full translations object
+console.log(getTranslations());
+```
+
+You can also use the same translation API in custom components:
+
+```tsx
+import { observer } from 'mobx-react-lite';
+import { translate } from '@ydesign/react-editor/utils/l10n';
+
+const App = observer(() => {
+  // sidePanel.yourLabel is a key in the translations object
+  return <div>{translate('sidePanel.yourLabel')}</div>;
+});
+```
+
+Keys live under namespaces such as `toolbar.*`, `sidePanel.*`, `workspace.*`, and `topbar.*`. If you are working on a translation or changing default labels, please share your results. It helps improve the defaults and provide ready-to-use translations.
+
+## How to configure fonts?
+
+Fonts have two scopes:
+
+- Design fonts: register them with `store.addFont`. They are stored with the current design.
+- Global fonts: register them with `addGlobalFont`. They are available across the app and are not stored in the design JSON.
+
+Google Fonts weight variants can be set with `setGoogleFontsVariants`:
+
+```ts
+import { setGoogleFontsVariants } from '@ydesign/react-editor/utils/fonts';
+
+setGoogleFontsVariants('400,700');
+```
+
+## Change default preset colors in the color picker
+
+The current color picker does not expose a global preset-color hook. The picker follows the selected element's current color. To offer a fixed palette, replace the toolbar color control with your own.

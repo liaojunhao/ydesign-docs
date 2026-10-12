@@ -17,7 +17,11 @@ export default async function Layout({
   );
 
   return (
-    <DocsLayout tree={source.getPageTree(lang)} {...options} links={links}>
+    <DocsLayout
+      tree={source.getPageTree(lang)}
+      {...options}
+      links={links}
+    >
       {children}
     </DocsLayout>
   );

@@ -3,5 +3,18 @@
   "description": "可视化编辑模板",
   "icon": "PenTool",
   "root": true,
-  "pages": ["index", "canvas", "templates"]
+  "pagesIndex": "[Overview](/cn/docs/editor/overview/)",
+  "pages": [
+    "(getting-started)",
+    "(interface)",
+    "(side-panel)",
+    "(export-import)",
+    "(API)",
+    "(features)",
+    "(demos)",
+    "(components)",
+    "---",
+    "[Full Examples Directory](/docs/examples)",
+    "..."
+  ]
 }

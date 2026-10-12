@@ -1,0 +1,191 @@
+---
+title: 概述
+description: ydesign 简介：用来搭建画布编辑器的 JavaScript 库
+---
+
+
+
+**ydesign** 是一套有明确约定的 JavaScript 库和 React 组件，用来搭建面向各类业务的画布编辑器。SDK 提供完整的可视化编辑框架，适合做白标设计工具、模板系统和程序化出图。
+
+已经有很多强大的 JavaScript 框架和工具可以帮你做画布编辑器，但它们几乎都偏底层。以 [Fabric.js](https://fabricjs.com/) 为例，它是很好的 2D 画布框架，但要做出完整的画布编辑器，你仍然需要写**大量代码**。
+
+ydesign 只解决一组明确的业务问题。它很快，我们也会尽量保持 API 轻量。把它放到页面上，就能得到一套功能完整的设计工具。
+
+## 快速开始（React）
+
+### 1. 安装 @ydesign/react-editor
+
+```bash
+npm install @ydesign/react-editor
+```
+
+### 2. 创建编辑器组件
+
+```tsx
+import React from 'react';
+import { YdesignContainer, SidePanelWrap, WorkspaceWrap } from '@ydesign/react-editor';
+import { Toolbar } from '@ydesign/react-editor/toolbar/toolbar';
+import { PagesTimeline } from '@ydesign/react-editor/pages-timeline';
+import { ZoomButtons } from '@ydesign/react-editor/toolbar/zoom-buttons';
+import { SidePanel } from '@ydesign/react-editor/side-panel';
+import { Workspace } from '@ydesign/react-editor/canvas/workspace';
+
+import '@ydesign/react-editor/style.css';
+
+import { createStore } from '@ydesign/react-editor/model/store';
+
+const store = createStore({
+  key: 'YOUR_API_KEY', // 在控制台创建
+  // 付费许可下可以隐藏返回链接
+  // 如果能保留，会对 ydesign 项目更有帮助
+  showCredit: true,
+});
+const page = store.addPage();
+
+export const Editor = () => {
+  return (
+    <YdesignContainer style={{ width: '100vw', height: '100vh' }}>
+      <SidePanelWrap>
+        <SidePanel store={store} />
+      </SidePanelWrap>
+      <WorkspaceWrap>
+        <Toolbar store={store} downloadButtonEnabled />
+        <Workspace store={store} />
+        <ZoomButtons store={store} />
+        <PagesTimeline store={store} />
+      </WorkspaceWrap>
+    </YdesignContainer>
+  );
+};
+```
+
+### 3. 在应用中使用该组件
+
+```tsx
+import { Editor } from './editor';
+
+const App = () => {
+  return <Editor />
+}
+```
+
+## 快速开始（无框架）
+
+```javascript
+import { createDemoApp } from '@ydesign/react-editor/editor-app';
+
+// 引入编辑器样式（基于 Tailwind 和内置的 shadcn 组件）
+import '@ydesign/react-editor/style.css';
+
+const { store } = createDemoApp({
+  container: document.getElementById('root'),
+  key: 'YOUR_API_KEY', // 在控制台创建
+  // 付费许可下可以隐藏返回链接
+  // 如果能保留，会对 ydesign 项目更有帮助
+  showCredit: true,
+});
+```
+
+没有打包器时，把构建产物里的样式文件放进页面：
+
+```html
+<link rel="stylesheet" href="./style.css" />
+```
+
+## 核心概念
+
+### Store
+
+[Store](/docs/store) 是控制画布数据和元素的主对象。它提供接口，用来添加、更新、删除画布对象，以及撤销/重做、选择变化、缩放和[导入与导出](/docs/import-and-export)。
+
+```javascript
+import { createStore } from '@ydesign/react-editor/model/store';
+
+const store = createStore();
+const page = store.addPage();
+
+page.addElement({
+  x: 50,
+  y: 50,
+  type: 'text',
+  fill: 'black',
+  text: 'hello',
+});
+```
+
+### Workspace 画布组件
+
+用来在页面上绘制画布的 React 组件。它自带常见编辑能力：选择、缩放、绘制对象、吸附等。
+
+```tsx
+import Workspace from '@ydesign/react-editor/canvas/workspace';
+
+const App = () => {
+  return <Workspace store={store} />;
+};
+```
+
+### UI 组件
+
+一组用于通用画布编辑器的 React 组件。
+
+- 工具栏，用于对齐、删除、修改对象样式等基本操作
+- 侧边栏，用于添加新对象
+- 缩放按钮
+- 以及其他组件
+
+```tsx
+import { YdesignContainer, SidePanelWrap, WorkspaceWrap } from '@ydesign/react-editor';
+import { Toolbar } from '@ydesign/react-editor/toolbar/toolbar';
+import { ZoomButtons } from '@ydesign/react-editor/toolbar/zoom-buttons';
+import { SidePanel } from '@ydesign/react-editor/side-panel';
+import { Workspace } from '@ydesign/react-editor/canvas/workspace';
+
+export const App = ({ store }) => {
+  return (
+    <YdesignContainer style={{ width: '100vw', height: '100vh' }}>
+      <SidePanelWrap>
+        <SidePanel store={store} />
+      </SidePanelWrap>
+      <WorkspaceWrap>
+        <Toolbar store={store} downloadButtonEnabled />
+        <Workspace store={store} />
+        <ZoomButtons store={store} />
+      </WorkspaceWrap>
+    </YdesignContainer>
+  );
+};
+```
+
+### 样式
+
+ydesign 的界面用 [Tailwind CSS](https://tailwindcss.com/) 编写，组件基于包内已经打好的 [shadcn/ui](https://ui.shadcn.com/)。接入时不用再单独安装一套 UI 组件库。
+
+图标使用 [Lucide](https://lucide.dev/)（`lucide-react`）。自定义侧边栏或工具栏时，直接从 `lucide-react` 引入图标。
+
+在应用入口引入样式。主题由这份文件里的语义 CSS 变量驱动，约定和 shadcn 一致：
+
+```ts
+import '@ydesign/react-editor/style.css';
+```
+
+宿主项目如果已经在用 Tailwind 和 shadcn，编辑器会跟着同一套颜色变量。也可以用 SDK 自带的 `ThemeSwitcher` 切换明暗和主色，不需要再装 token 包。
+
+自定义界面时优先用 Tailwind 类和 shadcn 组件，这样间距、颜色和圆角能和编辑器对齐。
+
+### 响应式更新
+
+ydesign 的核心基于 [MobX](https://mobx.js.org/)。可以用 MobX API，再配合 [mobx-state-tree](https://mobx-state-tree.js.org/intro/welcome)，给自己的应用加上响应式更新。在 React 里需要使用 `observer()`。
+
+```tsx
+import { observer } from 'mobx-react-lite';
+
+const App = observer(({ store }) => {
+  return (
+    <div>
+      <p>这里定义我们自己的自定义标签页。</p>
+      <p>当前页面上的元素数量：{store.activePage?.children.length}</p>
+    </div>
+  );
+});
+```

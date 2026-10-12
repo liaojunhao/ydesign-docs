@@ -1,0 +1,120 @@
+---
+title: 编辑器配置
+description: 配置 ydesign 的图片上传、界面文案和字体
+---
+
+## 如何修改图片上传行为？
+
+默认[侧边栏](/docs/side-panel-overview)里有上传面板，可以把本地图片导入设计稿。默认情况下，ydesign 会把本地文件转成 blob URL，再作为 `image` 元素的地址。blob URL 只在当前页面有效，刷新后会失效，也不适合写进需要保存的 [JSON](/docs/import-and-export)。
+
+**强烈建议把图片上传到你自己的服务器。** 这样 JSON 更小、更好读，画布性能也会更好。
+
+如果要把本地图片上传到服务器，使用：
+
+```ts
+import { setUploadFunc } from '@ydesign/react-editor/side-panel/upload-panel';
+
+// 在这里接上你自己的上传接口
+async function upload(localFile: File) {
+  const formData = new FormData();
+  formData.append('files[]', localFile);
+  const res = await fetch(yourServerURL, {
+    method: 'POST',
+    body: formData,
+  });
+  const json = await res.json();
+  const { url } = json;
+  // 返回一个短 URL
+  return url as string;
+}
+
+setUploadFunc(upload);
+```
+
+`setUploadFunc` 接收 `(file: File) => Promise<string>`，返回值会成为图片元素的 `src`。
+
+## 如何修改字体上传？
+
+当前 SDK 没有单独的字体上传钩子。把字体文件上传到你的服务器后，用 Store 注册，编辑器才能使用它：
+
+```ts
+store.addFont({
+  fontFamily: 'MyFont',
+  url: 'https://example.com/fonts/my-font.woff2',
+  name: '我的字体',
+});
+await store.loadFont('MyFont');
+```
+
+`store.addFont` 注册的字体会跟着设计数据走。如果希望字体在整个应用里可用、且不写入设计 JSON，使用全局字体：
+
+```ts
+import { addGlobalFont } from '@ydesign/react-editor/utils/fonts';
+
+addGlobalFont({
+  fontFamily: 'MyFont',
+  url: 'https://example.com/fonts/my-font.woff2',
+  name: '我的字体',
+});
+```
+
+## 如何翻译界面？
+
+要换成另一种语言，或只改几处文案，使用：
+
+```ts
+import { setTranslations } from '@ydesign/react-editor/config';
+
+setTranslations(
+  {
+    sidePanel: {
+      text: '文本',
+      myFonts: '我的字体',
+    },
+  },
+  {
+    validate: true, // 不需要校验时设为 false
+  }
+);
+```
+
+查看完整文案结构：
+
+```ts
+import { getTranslations } from '@ydesign/react-editor/config';
+
+console.log(getTranslations());
+```
+
+自定义组件也可以走同一套文案：
+
+```tsx
+import { observer } from 'mobx-react-lite';
+import { translate } from '@ydesign/react-editor/utils/l10n';
+
+const App = observer(() => {
+  // sidePanel.yourLabel 是翻译对象里的键
+  return <div>{translate('sidePanel.yourLabel')}</div>;
+});
+```
+
+文案键分布在 `toolbar.*`、`sidePanel.*`、`workspace.*`、`topbar.*` 等命名空间。如果你在整理某种语言的翻译，或在改默认文案，欢迎把结果分享给我们。这能帮助改进默认文案，并提供可以直接使用的翻译。
+
+## 如何配置字体？
+
+字体有两种范围：
+
+- 设计字体：用 `store.addFont` 注册，保存在当前设计里。
+- 全局字体：用 `addGlobalFont` 注册，整个应用可用，不写入设计 JSON。
+
+Google Fonts 的字重变体可以用 `setGoogleFontsVariants` 调整：
+
+```ts
+import { setGoogleFontsVariants } from '@ydesign/react-editor/utils/fonts';
+
+setGoogleFontsVariants('400,700');
+```
+
+## 修改取色器的默认预设颜色
+
+当前取色器没有全局预设颜色钩子。颜色跟随选中元素的当前值。需要固定色板时，在自定义工具栏里换成自己的颜色控件。

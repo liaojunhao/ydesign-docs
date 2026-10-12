@@ -43,7 +43,7 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
       <div className="flex h-full flex-col @min-[36rem]:grid @min-[36rem]:grid-cols-[minmax(0,1.15fr)_minmax(9.75rem,11rem)_minmax(0,0.95fr)]">
         <section className="@container/editor flex min-w-0 flex-col">
           <div className="flex h-10 items-center gap-2 border-b border-black/5 bg-white px-3">
-            <div className="hidden min-w-0 items-center gap-2 text-[11px] text-neutral-500 sm:flex">
+            {/* <div className="hidden min-w-0 items-center gap-2 text-[11px] text-neutral-500 sm:flex">
               <span className="inline-flex items-center gap-1">
                 <LayoutTemplate className="size-3.5 shrink-0" />
                 <span className="hidden @min-[16rem]/editor:inline">
@@ -62,7 +62,7 @@ export function HeroVisual({ hero }: { hero: HeroCopy }) {
                   {hero.tools.image}
                 </span>
               </span>
-            </div>
+            </div> */}
             <span className="ml-auto rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] text-neutral-500">
               {hero.editor}
             </span>
