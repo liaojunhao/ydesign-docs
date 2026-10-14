@@ -5,8 +5,7 @@ export const homeCopy = {
     description:
       'Adjust the template, then pass different data to the API and batch-render posters and product images.',
     primaryCta: 'Start rendering',
-    imageDocsCta: 'Image docs',
-    editorDocsCta: 'Editor docs',
+    githubCta: 'Star on GitHub',
     scenarios: {
       eyebrow: 'Use cases',
       title: 'Generate every image automatically',
@@ -326,8 +325,7 @@ export const homeCopy = {
     description:
       '在编辑器里调整版式和文案，保存为可复用模板。传入不同数据，一次生成整批海报和商品图。',
     primaryCta: '开始渲染',
-    imageDocsCta: '图片渲染文档',
-    editorDocsCta: '编辑器文档',
+    githubCta: '在 GitHub 上标星',
     scenarios: {
       eyebrow: '应用场景',
       title: '自动生成每张图片',

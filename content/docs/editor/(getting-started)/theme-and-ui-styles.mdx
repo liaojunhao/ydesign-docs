@@ -1,0 +1,81 @@
+---
+title: Theme
+description: Enable dark mode and override ydesign UI styles with CSS variables
+---
+
+Style the ydesign editor so it matches your product.
+
+The UI is written with [Tailwind CSS](https://tailwindcss.com/). Components are the [shadcn/ui](https://ui.shadcn.com/) set already bundled in the package. Colors come from semantic CSS variables, using the same convention as shadcn. Load the stylesheet at the app entry:
+
+```ts
+import '@ydesign/react-editor/style.css';
+```
+
+## How to enable dark theme?
+
+Dark mode works by adding the `dark` class to `document.documentElement`. Call `setTheme` to switch it. The choice is stored locally:
+
+```ts
+import { setTheme } from '@ydesign/react-editor/theme';
+
+setTheme({ mode: 'dark' });
+```
+
+`mode` is `'light'`, `'dark'`, or `'system'`. `'system'` follows `prefers-color-scheme`.
+
+In React, `ThemeProvider` can set the defaults on mount. Theme state is a module-level singleton, so the provider is optional. It only writes the default mode and preset:
+
+```tsx
+import { ThemeProvider } from '@ydesign/react-editor/theme';
+
+<ThemeProvider defaultMode="dark" defaultPreset="violet">
+  {children}
+</ThemeProvider>
+```
+
+`ThemeSwitcher` renders the mode toggle and the primary-color dots:
+
+```tsx
+import { ThemeSwitcher } from '@ydesign/react-editor/theme';
+
+<ThemeSwitcher />
+```
+
+## How to change styles of the side panel and toolbar?
+
+The side panel, toolbar, and buttons read semantic variables such as `--background`, `--foreground`, `--sidebar`, `--primary`, and `--radius`. The editor root is `.design-app-container`.
+
+Override the background, sidebar surface, and radius in CSS:
+
+```css
+:root {
+  --background: oklch(98% 0.01 90);
+  --sidebar: oklch(96% 0.01 90);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: oklch(16% 0.01 260);
+  --sidebar: oklch(20% 0.01 260);
+}
+```
+
+Do not set the primary color only in a stylesheet. When a preset changes, `setTheme` writes `--primary`, `--primary-foreground`, `--sidebar-primary`, and `--sidebar-primary-foreground` as inline styles on `html`. Those inline styles win over stylesheet rules.
+
+Change the primary color with a preset:
+
+```ts
+import { setTheme } from '@ydesign/react-editor/theme';
+
+setTheme({ preset: 'blue' });
+```
+
+Presets: `neutral`, `amber`, `blue`, `cyan`, `emerald`, `fuchsia`, `green`, `indigo`, `lime`, `orange`, `pink`, `purple`, `red`, `rose`, `sky`, `teal`, `violet`, `yellow`.
+
+Read or change the current theme from a component:
+
+```tsx
+import { useTheme } from '@ydesign/react-editor/theme';
+
+const { mode, setMode, preset, setPreset } = useTheme();
+```

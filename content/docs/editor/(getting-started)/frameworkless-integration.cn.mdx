@@ -1,0 +1,53 @@
+---
+title: 无框架集成
+description: 不使用 React，用一段脚本把 ydesign 嵌进页面
+---
+
+**ydesign** 主要面向 React 接入。
+
+如果不需要定制界面，可以用无框架版本。页面里放样式和一段打包脚本即可。打包产物是 `react-editor.bundle.js`，样式是 `style.css`。下面用 unpkg 上的地址；你也可以把这两个文件放到自己的 CDN，再换成自己的域名。
+
+```html
+<!-- 引入样式 -->
+<link
+  href="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/style.css"
+  rel="stylesheet"
+/>
+
+<!-- 引入 ydesign bundle -->
+<!-- 放在文档 body 里，不要放进 head -->
+<script src="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/react-editor.bundle.js"></script>
+
+<!-- 编辑器容器尺寸 -->
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  #container {
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+
+<!-- 编辑器挂载点 -->
+<div id="container"></div>
+
+<!-- 初始化编辑器 -->
+<script>
+  const { createDesignEditorApp } = window.YDesignEditor;
+
+  const { store } = createDesignEditorApp({
+    // 到 https://ydesign.com/cabinet/ 申请你自己的 License Key
+    key: 'YOUR_LICENSE_KEY',
+    container: document.getElementById('container'),
+    // 可选：指定要显示的侧边栏，不传则显示默认面板
+    // sections: ['text', 'photos', 'shapes', 'upload', 'background', 'layers'],
+  });
+
+  // store 可以使用 Store API：/docs/store
+  // createDemoApp 是 createDesignEditorApp 的别名
+</script>
+```
+
+深色模式给 `html` 加上 `dark` 即可，例如 `<html class="dark">`。

@@ -12,9 +12,7 @@ export default async function Layout({
 }) {
   const { lang } = await params;
   const options = baseOptions(lang);
-  const links = options.links?.filter(
-    (item) => !('url' in item && item.url === `/${lang}/docs`),
-  );
+  const links = options.links?.filter((item) => item.type !== 'custom');
 
   return (
     <DocsLayout

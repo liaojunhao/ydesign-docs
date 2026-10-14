@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { DocsNavMenu } from '@/components/docs-nav-menu';
 import { getAppName, gitConfig } from './shared';
 
 export function baseOptions(locale: string): BaseLayoutProps {
@@ -23,9 +24,8 @@ export function baseOptions(locale: string): BaseLayoutProps {
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
     links: [
       {
-        type: 'main',
-        text: isCn ? '文档' : 'Docs',
-        url: `/${locale}/docs`,
+        type: 'custom',
+        children: <DocsNavMenu locale={locale} />,
       },
       {
         type: 'main',

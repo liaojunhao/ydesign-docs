@@ -27,7 +27,7 @@ export function ScenariosSection({
     <section className="mt-20 pt-16 sm:mt-28 sm:pt-20">
       <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
-          <p className="mb-3 text-xs font-medium tracking-widest text-[#5645d4]">
+          <p className="mb-3 text-xs font-medium tracking-widest text-[#5645d4] dark:text-[#c4b6ff]">
             {copy.eyebrow}
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-balance md:text-4xl">
@@ -53,8 +53,8 @@ export function ScenariosSection({
                 aria-selected={selected}
                 className={`shrink-0 rounded-xl border px-4 py-3 text-left transition-all lg:px-5 lg:py-4 ${
                   selected
-                    ? 'border-[#5645d4] bg-[#e6e0f5]/45 shadow-sm'
-                    : 'border-transparent hover:bg-[#f6f5f4]'
+                    ? 'border-[#5645d4] bg-[#e6e0f5]/45 shadow-sm dark:border-[#c4b6ff]/40 dark:bg-[#221c36] dark:shadow-none'
+                    : 'border-transparent hover:bg-[#f6f5f4] dark:hover:bg-white/8'
                 }`}
                 onClick={() => setActive(index)}
               >
@@ -62,7 +62,7 @@ export function ScenariosSection({
                   <span
                     className={`font-mono text-xs ${
                       selected
-                        ? 'text-[#5645d4]'
+                        ? 'text-[#5645d4] dark:text-[#c4b6ff]'
                         : 'text-fd-muted-foreground/60'
                     }`}
                   >

@@ -1,0 +1,81 @@
+---
+title: 主题
+description: 为 ydesign 开启深色模式，并用 CSS 变量调整界面样式
+---
+
+把 ydesign 编辑器的外观调成和你的产品一致。
+
+界面用 [Tailwind CSS](https://tailwindcss.com/) 编写，组件是包内已经打好的 [shadcn/ui](https://ui.shadcn.com/)。颜色由语义 CSS 变量驱动，约定和 shadcn 一致。接入时在入口引入样式：
+
+```ts
+import '@ydesign/react-editor/style.css';
+```
+
+## 如何开启深色主题？
+
+深色模式通过给 `document.documentElement` 加上 `dark` 类生效。用 `setTheme` 切换即可，选择会记在本地：
+
+```ts
+import { setTheme } from '@ydesign/react-editor/theme';
+
+setTheme({ mode: 'dark' });
+```
+
+`mode` 可以是 `'light'`、`'dark'` 或 `'system'`。`'system'` 跟随系统的 `prefers-color-scheme`。
+
+在 React 里也可以用 `ThemeProvider` 写入默认值。主题状态是模块级单例，不包 Provider 也能用；Provider 只在挂载时设置默认明暗和主色：
+
+```tsx
+import { ThemeProvider } from '@ydesign/react-editor/theme';
+
+<ThemeProvider defaultMode="dark" defaultPreset="violet">
+  {children}
+</ThemeProvider>
+```
+
+界面上直接放 `ThemeSwitcher`，里面包含明暗切换和主色圆点：
+
+```tsx
+import { ThemeSwitcher } from '@ydesign/react-editor/theme';
+
+<ThemeSwitcher />
+```
+
+## 如何修改侧边栏和工具栏样式？
+
+侧边栏、工具栏和按钮都读语义变量，例如 `--background`、`--foreground`、`--sidebar`、`--primary`、`--radius`。编辑器根节点是 `.design-app-container`。
+
+背景、侧边栏底色和圆角可以直接覆盖：
+
+```css
+:root {
+  --background: oklch(98% 0.01 90);
+  --sidebar: oklch(96% 0.01 90);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: oklch(16% 0.01 260);
+  --sidebar: oklch(20% 0.01 260);
+}
+```
+
+主色不要只写在样式表里。切换预设时，`setTheme` 会把 `--primary`、`--primary-foreground`、`--sidebar-primary`、`--sidebar-primary-foreground` 写到 `html` 的行内样式上，行内样式会盖过样式表。
+
+改主色用预设：
+
+```ts
+import { setTheme } from '@ydesign/react-editor/theme';
+
+setTheme({ preset: 'blue' });
+```
+
+可选预设：`neutral`、`amber`、`blue`、`cyan`、`emerald`、`fuchsia`、`green`、`indigo`、`lime`、`orange`、`pink`、`purple`、`red`、`rose`、`sky`、`teal`、`violet`、`yellow`。
+
+在组件里读取或修改当前主题：
+
+```tsx
+import { useTheme } from '@ydesign/react-editor/theme';
+
+const { mode, setMode, preset, setPreset } = useTheme();
+```

@@ -1,0 +1,53 @@
+---
+title: Frameworkless Integration
+description: Use ydesign without React by embedding a single script bundle
+---
+
+**ydesign** is built for React.
+
+When you do not need to customize the UI, use the frameworkless build. Add the stylesheet and one script to the page. The bundle file is `react-editor.bundle.js`, and the stylesheet is `style.css`. The URLs below use unpkg. You can host those two files on your own CDN and replace the URLs.
+
+```html
+<!-- add styles -->
+<link
+  href="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/style.css"
+  rel="stylesheet"
+/>
+
+<!-- add the ydesign bundle -->
+<!-- put this in the document body, not in <head> -->
+<script src="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/react-editor.bundle.js"></script>
+
+<!-- size the editor -->
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  #container {
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+
+<!-- mount point -->
+<div id="container"></div>
+
+<!-- init the editor -->
+<script>
+  const { createDesignEditorApp } = window.YDesignEditor;
+
+  const { store } = createDesignEditorApp({
+    // create your own license key at https://ydesign.com/cabinet/
+    key: 'YOUR_LICENSE_KEY',
+    container: document.getElementById('container'),
+    // optionally choose which side panels to show
+    // sections: ['text', 'photos', 'shapes', 'upload', 'background', 'layers'],
+  });
+
+  // store exposes the Store API: /docs/store
+  // createDemoApp is an alias of createDesignEditorApp
+</script>
+```
+
+For dark mode, add the `dark` class to `html`, for example `<html class="dark">`.
