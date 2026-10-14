@@ -3,7 +3,9 @@ title: ydesign 按钮
 description: 用一段脚本和一个按钮，把 ydesign 编辑器嵌进任意网站
 ---
 
-**ydesign 按钮**用一段脚本把编辑器嵌进任意网站。页面上放一个按钮，用户点开就能在你的应用里做设计。
+**ydesign 按钮**用一段脚本把编辑器嵌进任意网站。页面上放一个按钮，点击后以弹窗打开编辑器，用户在你的应用里完成设计。
+
+脚本地址：[https://static.yitu-design.com/button-v1.js](https://static.yitu-design.com/button-v1.js)。它会打开 `https://yitu-design.com/studio`，并通过 `postMessage` 把导出结果交回当前页面。
 
 ## 为什么使用 ydesign 按钮？
 
@@ -12,49 +14,45 @@ description: 用一段脚本和一个按钮，把 ydesign 编辑器嵌进任意�
 3. **省掉外部工具：** 用户在你的网站里完成设计，不必再跳到别的设计平台。
 4. **提高停留：** 用户能在站内创建和修改设计，使用时间会更长。
 
+## 示例
+
+下面的按钮会加载线上脚本，并调用 `createYdesignEditor`。点「完成」后，导出的图片会显示在按钮下方。
+
+<LiveCodeBlock example="ydesignButton" />
+
 ## 如何接入？
 
-1. 引入样式和打包脚本。产物是 `react-editor.bundle.js` 和 `style.css`。下面用 unpkg 上的地址；你也可以把这两个文件放到自己的 CDN，再换成自己的域名。
+1. 引入脚本。
 
 ```html
-<link
-  href="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/style.css"
-  rel="stylesheet"
-/>
-<script src="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/react-editor.bundle.js"></script>
+<script src="https://static.yitu-design.com/button-v1.js"></script>
 ```
 
-2. 在页面上放一个按钮和挂载容器。
+2. 在页面上放一个按钮。
 
 ```html
 <button id="ydesign-button">打开编辑器</button>
-<div id="ydesign-editor" style="width: 100vw; height: 100vh"></div>
 ```
 
-3. 点击按钮时，用 License Key 打开编辑器。
+3. 点击时调用 `createYdesignEditor`。
 
 ```html
 <script>
   const button = document.getElementById('ydesign-button');
   button.addEventListener('click', () => {
-    const { createDesignEditorApp } = window.YDesignEditor;
-
-    const { store } = createDesignEditorApp({
+    window.createYdesignEditor({
       // 到 https://ydesign.com/cabinet/ 申请你自己的 License Key
       key: 'YOUR_LICENSE_KEY',
-      container: document.getElementById('ydesign-editor'),
+      onPublish: ({ dataURL, json }) => {
+        // dataURL 是导出的图片，json 是设计数据
+        console.log(dataURL, json);
+      },
     });
-
-    // store 可以使用 Store API：/docs/store
   });
 </script>
 ```
 
-`createDemoApp` 是 `createDesignEditorApp` 的别名。
-
 ## 配置项
-
-`createDesignEditorApp` 接受 `key`、`container` 和 `sections`。画布尺寸、设计数据和保存都走返回的 `store`。
 
 ```javascript
 function inchesToPx(inches) {
@@ -62,10 +60,8 @@ function inchesToPx(inches) {
   return inches * dpi;
 }
 
-const { store } = window.YDesignEditor.createDesignEditorApp({
+window.createYdesignEditor({
   key: 'YOUR_LICENSE_KEY',
-  container: document.getElementById('ydesign-editor'),
-  // 要显示的侧边栏，不传则显示默认面板
   sections: [
     'templates',
     'photos',
@@ -76,33 +72,35 @@ const { store } = window.YDesignEditor.createDesignEditorApp({
     'layers',
     'size',
   ],
-});
-
-// 默认打开的面板
-store.openSidePanel('photos');
-
-// 画布初始尺寸，单位是像素
-store.setSize({
+  defaultSection: 'photos',
   width: inchesToPx(20),
   height: inchesToPx(10),
+  // 从 URL 载入设计
+  jsonUrl: 'https://example.com/design.json',
+  // 或者直接传入设计 JSON，脚本会在编辑器就绪后发给 studio
+  json: {
+    // 设计稿的 JSON
+  },
+  publishLabel: '完成',
+  onPublish: ({ dataURL, json }) => {
+    document.getElementById('result').src = dataURL;
+    console.log('json', json);
+  },
+  onChange: ({ json }) => {
+    console.log('json', json);
+  },
+  uploads: [
+    {
+      url: 'https://example.com/image.jpg',
+      preview: 'https://example.com/image.jpg',
+    },
+  ],
+  translations: {
+    sidePanel: {
+      templates: '模板',
+    },
+  },
 });
-
-// 从 JSON 对象载入设计
-store.loadJSON({
-  // 设计稿的 JSON
-});
-
-// 设计有改动时取出 JSON，自行保存以便稍后 loadJSON 恢复
-store.on('change', () => {
-  const json = store.toJSON();
-  console.log('json', json);
-});
-
-// 用你自己的按钮保存。返回图片和设计 JSON
-async function publish() {
-  const dataURL = await store.toDataURL();
-  const json = store.toJSON();
-  document.getElementById('result').src = dataURL;
-  console.log('json', json);
-}
 ```
+
+`createYdesignEditor` 返回 `{ destroy }`，可以主动关掉弹窗。点击遮罩也会关闭。

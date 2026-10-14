@@ -9,17 +9,88 @@ import {
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { CodeBlock } from 'fumadocs-ui/components/codeblock';
 import { Button } from './demo-button';
-import { counterExample, helloExample, renderExample } from './live-examples';
+import {
+  counterExample,
+  helloExample,
+  renderExample,
+  ydesignButtonExample,
+  ydesignButtonExampleEn,
+} from './live-examples';
+
+const YDESIGN_BUTTON_SCRIPT = 'https://static.yitu-design.com/button-v1.js';
+
+type YdesignButtonConfig = {
+  key?: string;
+  url?: string;
+  sections?: string[];
+  defaultSection?: string;
+  width?: number;
+  height?: number;
+  jsonUrl?: string;
+  json?: unknown;
+  publishLabel?: string;
+  uploads?: unknown;
+  templates?: unknown;
+  translations?: unknown;
+  strictOrigin?: boolean;
+  onPublish?: (payload: { dataURL?: string; json?: unknown }) => void;
+  onChange?: (payload: { json?: unknown }) => void;
+  uploadFunc?: (file: {
+    dataURL: string;
+    id?: string;
+    name?: string;
+    mime?: string;
+  }) => Promise<string>;
+};
+
+declare global {
+  interface Window {
+    createYdesignEditor?: (config: YdesignButtonConfig) => { destroy: () => void };
+  }
+}
+
+function loadYdesignButtonScript() {
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (window.createYdesignEditor) return Promise.resolve();
+
+  const existing = document.querySelector<HTMLScriptElement>(
+    `script[src="${YDESIGN_BUTTON_SCRIPT}"]`,
+  );
+  if (existing) {
+    return new Promise<void>((resolve, reject) => {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      existing.addEventListener('error', () => reject(new Error('ydesign button script failed')), {
+        once: true,
+      });
+    });
+  }
+
+  return new Promise<void>((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = YDESIGN_BUTTON_SCRIPT;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('ydesign button script failed'));
+    document.body.appendChild(script);
+  });
+}
+
+function createYdesignEditor(config: YdesignButtonConfig) {
+  return loadYdesignButtonScript().then(() => window.createYdesignEditor?.(config));
+}
 
 const defaultScope = {
   Button,
   useState: useReactState,
+  createYdesignEditor,
 };
 
 const examples = {
   hello: helloExample,
   counter: counterExample,
   render: renderExample,
+  ydesignButton: ydesignButtonExample,
+  ydesignButtonEn: ydesignButtonExampleEn,
 };
 
 type LiveTheme = NonNullable<ComponentProps<typeof LiveProvider>['theme']>;

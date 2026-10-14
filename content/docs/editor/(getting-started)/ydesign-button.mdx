@@ -3,7 +3,9 @@ title: ydesign Button
 description: Embed the ydesign editor into any website with a script and a button
 ---
 
-**ydesign Button** embeds the editor into any website with one script. A button on the page opens the editor so people can design inside your app.
+**ydesign Button** embeds the editor into any website with one script. A button opens the editor in a dialog, so people can design inside your app.
+
+The script is [https://static.yitu-design.com/button-v1.js](https://static.yitu-design.com/button-v1.js). It opens `https://yitu-design.com/studio` and sends the export back to the page with `postMessage`.
 
 ## Why use the ydesign button?
 
@@ -12,47 +14,45 @@ description: Embed the ydesign editor into any website with a script and a butto
 3. **No extra design tool:** People finish the design on your site instead of leaving for another platform.
 4. **More time on site:** Creating and editing designs in place keeps people in your product longer.
 
+## Example
+
+The button below loads the hosted script and calls `createYdesignEditor`. After you click Done, the exported image appears under the button.
+
+<LiveCodeBlock example="ydesignButtonEn" />
+
 ## How to integrate
 
-1. Add the stylesheet and the bundle. The files are `style.css` and `react-editor.bundle.js`. The URLs below use unpkg. You can host those two files on your own CDN and replace the URLs.
+1. Add the script.
 
 ```html
-<link
-  href="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/style.css"
-  rel="stylesheet"
-/>
-<script src="https://unpkg.com/@ydesign/react-editor@0.8.2/dist/react-editor.bundle.js"></script>
+<script src="https://static.yitu-design.com/button-v1.js"></script>
 ```
 
-2. Add a button and a mount container.
+2. Add a button.
 
 ```html
 <button id="ydesign-button">Open editor</button>
-<div id="ydesign-editor" style="width: 100vw; height: 100vh"></div>
 ```
 
-3. Open the editor when the button is clicked. Pass your license key.
+3. Call `createYdesignEditor` on click.
 
 ```html
 <script>
   const button = document.getElementById('ydesign-button');
   button.addEventListener('click', () => {
-    const { createDesignEditorApp } = window.YDesignEditor;
-
-    const { store } = createDesignEditorApp({
+    window.createYdesignEditor({
       // create your own license key at https://ydesign.com/cabinet/
       key: 'YOUR_LICENSE_KEY',
-      container: document.getElementById('ydesign-editor'),
+      onPublish: ({ dataURL, json }) => {
+        // dataURL is the exported image, json is the design
+        console.log(dataURL, json);
+      },
     });
   });
 </script>
 ```
 
-`createDemoApp` is an alias of `createDesignEditorApp`.
-
 ## Options
-
-`createDesignEditorApp` takes `key`, `container`, and `sections`. Canvas size, design data, and saving go through the returned `store`.
 
 ```javascript
 function inchesToPx(inches) {
@@ -60,10 +60,8 @@ function inchesToPx(inches) {
   return inches * dpi;
 }
 
-const { store } = window.YDesignEditor.createDesignEditorApp({
+window.createYdesignEditor({
   key: 'YOUR_LICENSE_KEY',
-  container: document.getElementById('ydesign-editor'),
-  // side panels to show; omit this to use the defaults
   sections: [
     'templates',
     'photos',
@@ -74,33 +72,35 @@ const { store } = window.YDesignEditor.createDesignEditorApp({
     'layers',
     'size',
   ],
-});
-
-// panel to open first
-store.openSidePanel('photos');
-
-// initial canvas size, in pixels
-store.setSize({
+  defaultSection: 'photos',
   width: inchesToPx(20),
   height: inchesToPx(10),
+  // load a design from a URL
+  jsonUrl: 'https://example.com/design.json',
+  // or pass the design JSON; the script sends it after the studio is ready
+  json: {
+    // design JSON
+  },
+  publishLabel: 'Done',
+  onPublish: ({ dataURL, json }) => {
+    document.getElementById('result').src = dataURL;
+    console.log('json', json);
+  },
+  onChange: ({ json }) => {
+    console.log('json', json);
+  },
+  uploads: [
+    {
+      url: 'https://example.com/image.jpg',
+      preview: 'https://example.com/image.jpg',
+    },
+  ],
+  translations: {
+    sidePanel: {
+      templates: 'Templates',
+    },
+  },
 });
-
-// load a design from a JSON object
-store.loadJSON({
-  // design JSON
-});
-
-// read JSON whenever the design changes, and save it yourself so loadJSON can restore it
-store.on('change', () => {
-  const json = store.toJSON();
-  console.log('json', json);
-});
-
-// save from your own button. This returns the image and the design JSON
-async function publish() {
-  const dataURL = await store.toDataURL();
-  const json = store.toJSON();
-  document.getElementById('result').src = dataURL;
-  console.log('json', json);
-}
 ```
+
+`createYdesignEditor` returns `{ destroy }`, so you can close the dialog yourself. Clicking the backdrop closes it too.
